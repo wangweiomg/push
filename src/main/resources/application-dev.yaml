@@ -9,7 +9,6 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 1
     minIdle: 1
-    maxIdle: 5
     maxActive: 20
     maxWait: 60000
     # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
@@ -32,5 +31,9 @@ spring:
 logging:
   level:
     com.honeywen.push.mapper: DEBUG
-
-
+wx:
+  mp:
+    appID: wx1683d37d4495c54e
+    appsecret: c6aa9e6e24f3a6dab5cb836ace121603
+    token: myweixin
+    aesKey:
