@@ -29,6 +29,9 @@ public class AccountController {
     @Autowired
     private WxMpService wxMpService;
 
+    private String template1 = "An1aqe9SFEfVG7gWE4C8thJiCMPaeWSl-b397wb_2C8";
+    private String template2 = "VrmkUnF0pyVlHKwK-1nIURYioBQSioYF3dJAk6f6D0A";
+
 
     @GetMapping("/msg")
     public void wxMsg() {
@@ -38,12 +41,13 @@ public class AccountController {
         WxMpKefuMessage message1 = WxMpKefuMessage.TEXT().toUser(wangwei).content("hello world, wangwei").build();
         WxMpKefuMessage message2 = WxMpKefuMessage.TEXT().toUser(yuanfang).content("hello world, yuanfang").build();
 
-        WxMpTemplateData data1 = new WxMpTemplateData("title", "转账提醒");
-        WxMpTemplateData data2 = new WxMpTemplateData("content", "收到拆迁款[4920126.78]元。");
-        List<WxMpTemplateData> list = Lists.newArrayList(data1, data2);
+        WxMpTemplateData data1 = new WxMpTemplateData("keyword1", "转账提醒");
+        WxMpTemplateData data2 = new WxMpTemplateData("keyword2", "任远方");
+        WxMpTemplateData data3 = new WxMpTemplateData("keyword3", "收到拆迁款 4920126.78元。");
+        List<WxMpTemplateData> list = Lists.newArrayList(data1, data2, data3);
 
-        WxMpTemplateMessage templateMessage1 = WxMpTemplateMessage.builder().templateId("An1aqe9SFEfVG7gWE4C8thJiCMPaeWSl-b397wb_2C8").toUser(wangwei).data(list).build();
-        WxMpTemplateMessage templateMessage2 = WxMpTemplateMessage.builder().templateId("An1aqe9SFEfVG7gWE4C8thJiCMPaeWSl-b397wb_2C8").toUser(yuanfang).data(list).build();
+        WxMpTemplateMessage templateMessage1 = WxMpTemplateMessage.builder().templateId(template2).toUser(wangwei).data(list).build();
+        WxMpTemplateMessage templateMessage2 = WxMpTemplateMessage.builder().templateId(template2).toUser(yuanfang).data(list).build();
         try {
             wxMpService.getKefuService().sendKefuMessage(message1);
             wxMpService.getKefuService().sendKefuMessage(message2);

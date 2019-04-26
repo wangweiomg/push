@@ -37,4 +37,5 @@ wx:
     appsecret: c6aa9e6e24f3a6dab5cb836ace121603
     token: myweixin
     aesKey:
-    templateID: An1aqe9SFEfVG7gWE4C8thJiCMPaeWSl-b397wb_2C8
+    template1: An1aqe9SFEfVG7gWE4C8thJiCMPaeWSl-b397wb_2C8
+    template2: VrmkUnF0pyVlHKwK-1nIURYioBQSioYF3dJAk6f6D0A
