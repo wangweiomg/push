@@ -31,29 +31,39 @@ public class AccountController {
 
     private String template1 = "An1aqe9SFEfVG7gWE4C8thJiCMPaeWSl-b397wb_2C8";
     private String template2 = "VrmkUnF0pyVlHKwK-1nIURYioBQSioYF3dJAk6f6D0A";
+    private String template3 = "waz4TzcmYxU32_FPvb3fQ2mC9zqMIdV45yH4MhB6UAQ";
 
 
     @GetMapping("/msg")
     public void wxMsg() {
 
         String wangwei = "o7ugQszTbCaw1pQkTSMVO7327-z4";
-        String yuanfang = "o7ugQszzrhLLsHKZA4r7x0dgrmRI";
+//        String yuanfang = "o7ugQszzrhLLsHKZA4r7x0dgrmRI";
         WxMpKefuMessage message1 = WxMpKefuMessage.TEXT().toUser(wangwei).content("hello world, wangwei").build();
-        WxMpKefuMessage message2 = WxMpKefuMessage.TEXT().toUser(yuanfang).content("hello world, yuanfang").build();
+//        WxMpKefuMessage message2 = WxMpKefuMessage.TEXT().toUser(yuanfang).content("hello world, yuanfang").build();
 
         WxMpTemplateData data1 = new WxMpTemplateData("keyword1", "转账提醒");
         WxMpTemplateData data2 = new WxMpTemplateData("keyword2", "任远方");
         WxMpTemplateData data3 = new WxMpTemplateData("keyword3", "收到拆迁款 4920126.78元。");
         List<WxMpTemplateData> list = Lists.newArrayList(data1, data2, data3);
 
+
+
+        WxMpTemplateData title = new WxMpTemplateData("title", "您尾号2269的招行一卡通入账人民币6720833.21元", "#0000FF");
+        WxMpTemplateData amount = new WxMpTemplateData("amount", "人民币6720833.21元", "#0000FF");
+        WxMpTemplateData tradeTime = new WxMpTemplateData("tradeTime", "04月27日20:08");
+        WxMpTemplateData tradeType = new WxMpTemplateData("tradeType", "汇款到账");
+        WxMpTemplateData payName = new WxMpTemplateData("payName", "唐丽");
+        WxMpTemplateData remark = new WxMpTemplateData("remark", "二期动迁款");
+        List<WxMpTemplateData> list3 = Lists.newArrayList(title, amount, tradeTime, tradeType, payName, remark);
+
         WxMpTemplateMessage templateMessage1 = WxMpTemplateMessage.builder().templateId(template2).toUser(wangwei).data(list).build();
-        WxMpTemplateMessage templateMessage2 = WxMpTemplateMessage.builder().templateId(template2).toUser(yuanfang).data(list).build();
+        WxMpTemplateMessage templateMessage3 = WxMpTemplateMessage.builder().templateId(template3).toUser(wangwei).data(list3).build();
         try {
             wxMpService.getKefuService().sendKefuMessage(message1);
-            wxMpService.getKefuService().sendKefuMessage(message2);
 
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage1);
-            wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage2);
+            wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage3);
         } catch (WxErrorException e) {
             e.printStackTrace();
         }
