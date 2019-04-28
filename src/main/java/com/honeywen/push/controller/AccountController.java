@@ -3,11 +3,8 @@ package com.honeywen.push.controller;
 import com.google.common.collect.Lists;
 import com.honeywen.push.entity.Account;
 import com.honeywen.push.service.AccountService;
-import lombok.SneakyThrows;
 import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.mp.api.WxMpKefuService;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.api.WxMpTemplateMsgService;
 import me.chanjar.weixin.mp.bean.kefu.WxMpKefuMessage;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
@@ -15,6 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,7 +53,7 @@ public class AccountController {
 
         WxMpTemplateData title = new WxMpTemplateData("title", "您尾号2269的招行一卡通入账人民币6720833.21元", "#0000FF");
         WxMpTemplateData amount = new WxMpTemplateData("amount", "人民币6720833.21元", "#0000FF");
-        WxMpTemplateData tradeTime = new WxMpTemplateData("tradeTime", "04月27日20:08");
+        WxMpTemplateData tradeTime = new WxMpTemplateData("tradeTime", DateTimeFormatter.ofPattern("MM月dd日HH:mm").format(LocalDateTime.now()));
         WxMpTemplateData tradeType = new WxMpTemplateData("tradeType", "汇款到账");
         WxMpTemplateData payName = new WxMpTemplateData("payName", "唐丽");
         WxMpTemplateData remark = new WxMpTemplateData("remark", "二期动迁款");
@@ -85,6 +87,20 @@ public class AccountController {
         List<Account> list = accountService.findAll();
         
         return list;
+
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(new Date());
+        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(LocalDate.now()));
+        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(LocalDate.now()));
+        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(LocalDate.now()));
+        System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).format(LocalDate.now()));
+
+        System.out.println(DateTimeFormatter.ofPattern("MM月dd日HH:mm").format(LocalDateTime.now()));
+
+
 
     }
 
