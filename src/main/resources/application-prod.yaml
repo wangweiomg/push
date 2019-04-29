@@ -34,8 +34,8 @@ logging:
     com.honeywen.push.mapper: DEBUG
 wx:
   mp:
-    appID: wx77d1f69d5a02247c
-    appsecret: uGUgONgPvs0VJ9z4rW5EoCJl608l6ZTe6UxpKia8kci
+    appID: wxbaa359d0c0f29dec
+    appsecret: 929db85b2aa2e07f853da5e2b92c4135
     token: myweixin
     aesKey:
-    templateID: An1aqe9SFEfVG7gWE4C8thJiCMPaeWSl-b397wb_2C8
+    templateID:
