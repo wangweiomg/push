@@ -33,7 +33,8 @@ public class AccountController {
 
     private String template1 = "An1aqe9SFEfVG7gWE4C8thJiCMPaeWSl-b397wb_2C8";
     private String template2 = "VrmkUnF0pyVlHKwK-1nIURYioBQSioYF3dJAk6f6D0A";
-    private String template3 = "waz4TzcmYxU32_FPvb3fQ2mC9zqMIdV45yH4MhB6UAQ";
+//    private String template3 = "waz4TzcmYxU32_FPvb3fQ2mC9zqMIdV45yH4MhB6UAQ";
+    private String template3 = "awwsyi8C6UFIPD1F1PT8aJrHPtiqP3-UoVWLxf9JsIg";
 
 
     @GetMapping("/msg")
@@ -41,30 +42,30 @@ public class AccountController {
 
         String wangwei = "o7ugQszTbCaw1pQkTSMVO7327-z4";
 //        String yuanfang = "o7ugQszzrhLLsHKZA4r7x0dgrmRI";
-        WxMpKefuMessage message1 = WxMpKefuMessage.TEXT().toUser(wangwei).content("hello world, wangwei").build();
+//        WxMpKefuMessage message1 = WxMpKefuMessage.TEXT().toUser(wangwei).content("hello world, wangwei").build();
 //        WxMpKefuMessage message2 = WxMpKefuMessage.TEXT().toUser(yuanfang).content("hello world, yuanfang").build();
 
-        WxMpTemplateData data1 = new WxMpTemplateData("keyword1", "转账提醒");
-        WxMpTemplateData data2 = new WxMpTemplateData("keyword2", "任远方");
-        WxMpTemplateData data3 = new WxMpTemplateData("keyword3", "收到拆迁款 4920126.78元。");
-        List<WxMpTemplateData> list = Lists.newArrayList(data1, data2, data3);
+
+//        WxMpTemplateData title = new WxMpTemplateData("title", "您尾号2269的招行一卡通入账人民币6720833.21元", "#0000FF");
+//        WxMpTemplateData amount = new WxMpTemplateData("amount", "人民币6720833.21元", "#0000FF");
+//        WxMpTemplateData tradeTime = new WxMpTemplateData("tradeTime", DateTimeFormatter.ofPattern("MM月dd日HH:mm").format(LocalDateTime.now()));
+//        WxMpTemplateData tradeType = new WxMpTemplateData("tradeType", "汇款到账");
+//        WxMpTemplateData payName = new WxMpTemplateData("payName", "唐丽娜");
+//        WxMpTemplateData remark = new WxMpTemplateData("remark", "域名转让费");
+//        List<WxMpTemplateData> list3 = Lists.newArrayList(title, amount, tradeTime, tradeType, payName, remark);
 
 
+        WxMpTemplateData first = new WxMpTemplateData("first", "您好，您的订单已付款成功");
+        WxMpTemplateData keyword1 = new WxMpTemplateData("keyword1", "88888888");
+        WxMpTemplateData keyword2 = new WxMpTemplateData("keyword2", DateTimeFormatter.ofPattern("MM月dd日HH:mm").format(LocalDateTime.now()));
+        WxMpTemplateData keyword3 = new WxMpTemplateData("keyword3", "274元");
+        WxMpTemplateData keyword4 = new WxMpTemplateData("keyword4", "信用卡");
+        WxMpTemplateData remark = new WxMpTemplateData("remark", "感谢您的惠顾");
+        List<WxMpTemplateData> list = Lists.newArrayList(first, keyword1, keyword2, keyword3, keyword4, remark);
 
-        WxMpTemplateData title = new WxMpTemplateData("title", "您尾号2269的招行一卡通入账人民币6720833.21元", "#0000FF");
-        WxMpTemplateData amount = new WxMpTemplateData("amount", "人民币6720833.21元", "#0000FF");
-        WxMpTemplateData tradeTime = new WxMpTemplateData("tradeTime", DateTimeFormatter.ofPattern("MM月dd日HH:mm").format(LocalDateTime.now()));
-        WxMpTemplateData tradeType = new WxMpTemplateData("tradeType", "汇款到账");
-        WxMpTemplateData payName = new WxMpTemplateData("payName", "唐丽");
-        WxMpTemplateData remark = new WxMpTemplateData("remark", "二期动迁款");
-        List<WxMpTemplateData> list3 = Lists.newArrayList(title, amount, tradeTime, tradeType, payName, remark);
-
-        WxMpTemplateMessage templateMessage1 = WxMpTemplateMessage.builder().templateId(template2).toUser(wangwei).data(list).build();
-        WxMpTemplateMessage templateMessage3 = WxMpTemplateMessage.builder().templateId(template3).toUser(wangwei).data(list3).build();
+        WxMpTemplateMessage templateMessage3 = WxMpTemplateMessage.builder().templateId(template3).toUser(wangwei).data(list).build();
         try {
-            wxMpService.getKefuService().sendKefuMessage(message1);
 
-            wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage1);
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage3);
         } catch (WxErrorException e) {
             e.printStackTrace();
