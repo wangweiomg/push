@@ -5,7 +5,8 @@ import com.honeywen.push.entity.Account;
 import com.honeywen.push.service.AccountService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.kefu.WxMpKefuMessage;
+import me.chanjar.weixin.mp.bean.WxMpUserQuery;
+import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,11 +63,17 @@ public class AccountController {
         WxMpTemplateData keyword4 = new WxMpTemplateData("keyword4", "信用卡");
         WxMpTemplateData remark = new WxMpTemplateData("remark", "感谢您的惠顾");
         List<WxMpTemplateData> list = Lists.newArrayList(first, keyword1, keyword2, keyword3, keyword4, remark);
+        WxMpUserQuery query = new WxMpUserQuery();
 
-        WxMpTemplateMessage templateMessage3 = WxMpTemplateMessage.builder().templateId(template3).toUser(wangwei).data(list).build();
         try {
+            List<WxMpUser> userList = wxMpService.getUserService().userInfoList(query);
+            for (WxMpUser user: userList) {
+                System.out.println(user.getNickname() +"-->" + user.getOpenId());
+            }
 
+            WxMpTemplateMessage templateMessage3 = WxMpTemplateMessage.builder().templateId(template3).toUser(userList.get(0).getOpenId()).data(list).build();
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage3);
+
         } catch (WxErrorException e) {
             e.printStackTrace();
         }
