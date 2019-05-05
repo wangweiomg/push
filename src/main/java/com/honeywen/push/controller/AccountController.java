@@ -63,15 +63,11 @@ public class AccountController {
         WxMpTemplateData keyword4 = new WxMpTemplateData("keyword4", "信用卡");
         WxMpTemplateData remark = new WxMpTemplateData("remark", "感谢您的惠顾");
         List<WxMpTemplateData> list = Lists.newArrayList(first, keyword1, keyword2, keyword3, keyword4, remark);
-        WxMpUserQuery query = new WxMpUserQuery();
 
         try {
-            List<WxMpUser> userList = wxMpService.getUserService().userInfoList(query);
-            for (WxMpUser user: userList) {
-                System.out.println(user.getNickname() +"-->" + user.getOpenId());
-            }
 
-            WxMpTemplateMessage templateMessage3 = WxMpTemplateMessage.builder().templateId(template3).toUser(userList.get(0).getOpenId()).data(list).build();
+            WxMpUser wxMpUser = wxMpService.getUserService().userInfo("");
+            WxMpTemplateMessage templateMessage3 = WxMpTemplateMessage.builder().templateId(template3).toUser(wangwei).data(list).build();
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage3);
 
         } catch (WxErrorException e) {
