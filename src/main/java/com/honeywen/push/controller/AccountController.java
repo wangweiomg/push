@@ -3,6 +3,7 @@ package com.honeywen.push.controller;
 import com.google.common.collect.Lists;
 import com.honeywen.push.entity.Account;
 import com.honeywen.push.service.AccountService;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.WxMpUserQuery;
@@ -24,6 +25,7 @@ import java.util.List;
  * @author wangwei
  * @date 2019/4/20
  */
+@Slf4j
 @RestController
 public class AccountController {
 
@@ -65,6 +67,9 @@ public class AccountController {
         List<WxMpTemplateData> list = Lists.newArrayList(first, keyword1, keyword2, keyword3, keyword4, remark);
 
         try {
+            String accessToken = wxMpService.getAccessToken();
+            log.info("<--accessToken-->{}", accessToken);
+            System.out.println("<--accessToken-->" + accessToken);
 
             WxMpUser wxMpUser = wxMpService.getUserService().userInfo("");
             WxMpTemplateMessage templateMessage3 = WxMpTemplateMessage.builder().templateId(template3).toUser(wangwei).data(list).build();
