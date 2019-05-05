@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.WxMpUserQuery;
+import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
@@ -38,6 +39,8 @@ public class AccountController {
     private String template2 = "VrmkUnF0pyVlHKwK-1nIURYioBQSioYF3dJAk6f6D0A";
 //    private String template3 = "waz4TzcmYxU32_FPvb3fQ2mC9zqMIdV45yH4MhB6UAQ";
     private String template3 = "awwsyi8C6UFIPD1F1PT8aJrHPtiqP3-UoVWLxf9JsIg";
+
+    private String wangweixiongdi = "odnyi57JGJQijGo7QdnbeUgq5ohQ";
 
 
     @GetMapping("/msg")
@@ -71,8 +74,8 @@ public class AccountController {
             log.info("<--accessToken-->{}", accessToken);
             System.out.println("<--accessToken-->" + accessToken);
 
-            WxMpUser wxMpUser = wxMpService.getUserService().userInfo("");
-            WxMpTemplateMessage templateMessage3 = WxMpTemplateMessage.builder().templateId(template3).toUser(wangwei).data(list).build();
+
+            WxMpTemplateMessage templateMessage3 = WxMpTemplateMessage.builder().templateId(template3).toUser(wangweixiongdi).data(list).build();
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage3);
 
         } catch (WxErrorException e) {
