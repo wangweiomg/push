@@ -12,3 +12,15 @@ CREATE TABLE t_user (
 INSERT INTO t_user (name, password, email, phone, remark) VALUES ('jack', '123456', 'jack@163.com', '18911331234', 'test');
 INSERT INTO t_user (name, password, email, phone, remark) VALUES ('rose', 'abced', 'rose@yahoo.com', '13711338884', 'test');
 INSERT INTO t_user (name, password, email, phone, remark) VALUES ('bob', 'qwerdf', 'bob@gmail.com', '18911330987', 'test');
+
+CREATE TABLE sys_users (
+  id int AUTO_INCREMENT PRIMARY KEY ,
+  openid VARCHAR(32) NOT NULL COMMENT '维系ID',
+  isadmin CHAR(1) NOT NULL COMMENT '是否管理员',
+  isforbidden CHAR(1) NOT NULL COMMENT '是否禁用'
+) COMMENT '系统用户表';
+-- 测试数据
+INSERT INTO `sys_users` VALUES ('1', 'sdfsdfsdf', '1', '0');
+INSERT INTO `sys_users` VALUES ('2', 'fdfsdfds', '0', '0');
+INSERT INTO `sys_users` VALUES ('3', 'fhhngff', '0', '0');
+INSERT INTO `sys_users` VALUES ('4', 'dffdf', '0', '1');
