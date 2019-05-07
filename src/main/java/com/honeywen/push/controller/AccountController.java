@@ -10,6 +10,7 @@ import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +40,7 @@ public class AccountController {
     private String wangweixiongdi = "odnyi57JGJQijGo7QdnbeUgq5ohQ";
 
 
-    @RequestMapping("/msg")
+    @GetMapping("/msg")
     public void wxMsg() {
 
         String wangwei = "o7ugQszTbCaw1pQkTSMVO7327-z4";

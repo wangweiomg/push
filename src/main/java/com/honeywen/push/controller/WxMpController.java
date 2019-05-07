@@ -19,7 +19,7 @@ public class WxMpController {
 
     }
 
-    @PostMapping
+    @PostMapping("")
     public String post(
             @RequestBody String requestBody,
             @RequestParam("signature") String signature,
