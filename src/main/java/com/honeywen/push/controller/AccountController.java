@@ -8,7 +8,7 @@ import me.chanjar.weixin.mp.bean.kefu.WxMpKefuMessage;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -37,7 +37,7 @@ public class AccountController {
     private String wangweixiongdi = "odnyi57JGJQijGo7QdnbeUgq5ohQ";
 
 
-    @GetMapping("/msg")
+    @RequestMapping("/msg")
     public void wxMsg() {
 
         String wangwei = "o7ugQszTbCaw1pQkTSMVO7327-z4";
