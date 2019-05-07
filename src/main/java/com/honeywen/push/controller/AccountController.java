@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.bean.kefu.WxMpKefuMessage;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,9 @@ public class AccountController {
 
             WxMpTemplateMessage templateMessage3 = WxMpTemplateMessage.builder().templateId(template3).toUser(wangweixiongdi).data(list).build();
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage3);
+
+            WxMpKefuMessage kefu1 = WxMpKefuMessage.TEXT().content("hello world kefu ").toUser(wangweixiongdi).build();
+            wxMpService.getKefuService().sendKefuMessage(kefu1);
 
         } catch (WxErrorException e) {
             e.printStackTrace();
