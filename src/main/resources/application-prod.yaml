@@ -38,4 +38,5 @@ wx:
     appsecret: 929db85b2aa2e07f853da5e2b92c4135
     token: myweixin
     aesKey:
-    templateID:
+    # 订单提醒
+    template1: awwsyi8C6UFIPD1F1PT8aJrHPtiqP3-UoVWLxf9JsIg

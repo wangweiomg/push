@@ -30,7 +30,10 @@ spring:
     useGlobalDataSourceStat: true
 logging:
   level:
+    org.springframework.web: INFO
+    com.github.binarywang: DEBUG
     com.honeywen.push.mapper: DEBUG
+
 wx:
   mp:
     appID: wx1683d37d4495c54e

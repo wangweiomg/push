@@ -23,6 +23,10 @@ public class WxMpConfiguration {
     @Value("${wx.mp.aesKey}")
     private String aesKey;
 
+    @Value("${wx.mp.template1}")
+    private String templateOrderNotice;
+
+
     private WxMpInMemoryConfigStorage config() {
 
         WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
