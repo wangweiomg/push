@@ -30,7 +30,7 @@ spring:
     useGlobalDataSourceStat: true
 logging:
   level:
-    org.springframework.web: INFO
+    org.springframework.web: DEBUG
     com.github.binarywang: DEBUG
     com.honeywen.push.mapper: DEBUG
 
