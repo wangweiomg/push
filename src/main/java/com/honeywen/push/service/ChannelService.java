@@ -3,6 +3,8 @@ package com.honeywen.push.service;
 
 import com.honeywen.push.entity.Channel;
 
+import java.util.List;
+
 /**
  * @Description 通道管理 服务类
  * @Author RYF
@@ -10,6 +12,14 @@ import com.honeywen.push.entity.Channel;
  **/
 public interface ChannelService {
 
-    boolean addChannel(Channel channel);
+    int addChannel(Channel channel);
+
+    List<Channel> getChannel(Integer userid);
+
+    Channel getChannelById(Channel channel);
+
+    int editChannel(Channel channel);
+
+    int deleteChannelById(Channel channel);
 
 }

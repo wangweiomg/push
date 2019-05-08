@@ -13,4 +13,14 @@ import java.util.List;
 public interface ChannelMapper {
 
     boolean addChannel(Channel channel);
+
+    List<Channel> getChannel(Integer userid);
+
+    Channel getChannelByName(Channel channel);
+
+    Channel getChannelById(Channel channel);
+
+    boolean editChannel(Channel channel);
+
+    boolean deleteChannelById(Channel channel);
 }

@@ -32,6 +32,31 @@ public class Channel {
      */
     private String sendkey;
 
+    /**
+     * 是否禁用
+     */
+    private String isforbidden;
+
+    /**
+     * 原有用户名-非字段
+     */
+    private String oldname;
+
+    public String getOldname() {
+        return oldname;
+    }
+
+    public void setOldname(String oldname) {
+        this.oldname = oldname;
+    }
+
+    public String getIsforbidden() {
+        return isforbidden;
+    }
+
+    public void setIsforbidden(String isforbidden) {
+        this.isforbidden = isforbidden;
+    }
 
     public Integer getId() {
         return id;

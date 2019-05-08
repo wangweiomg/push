@@ -30,5 +30,6 @@ CREATE TABLE channel (
   name VARCHAR(300) NOT NULL COMMENT '通道名称',
   email VARCHAR(300) NOT NULL COMMENT '邮箱',
   userid int NOT NULL COMMENT '用户id',
-  sendkey VARCHAR(50) NOT NULL  COMMENT 'sendkey'
+  sendkey VARCHAR(50) NOT NULL  COMMENT 'sendkey',
+  isforbidden CHAR(1) NOT NULL  COMMENT '是否禁用 1：是 0：否'
 ) COMMENT '通道表';
