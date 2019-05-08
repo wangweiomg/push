@@ -29,7 +29,6 @@ public @Data class User extends BaseModel implements Serializable {
      */
     private Integer sex;
     private String headImgUrl;
-    private String gender;
     private String country;
     private String province;
     private String city;

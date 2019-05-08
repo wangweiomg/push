@@ -19,7 +19,6 @@
         sex_desc,
         nickname,
         head_img_url,
-        gender,
         country,
         province,
         city,
@@ -143,9 +142,6 @@
             </if>
             <if test="headImgUrl != null and headImgUrl != ''">
                 head_img_url = #{headImgUrl},
-            </if>
-            <if test="gender != null">
-                gender = #{gender},
             </if>
             <if test="country != null and country !=''">
                 country = #{country},
