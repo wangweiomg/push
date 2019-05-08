@@ -49,12 +49,29 @@ public class WxMpController {
                         + " timestamp=[{}], nonce=[{}], requestBody=[\n{}\n] ",
                 openid, signature, encType, msgSignature, timestamp, nonce, requestBody);
 
+        String out = null;
         // 明文传输
         if (encType == null) {
-
+            WxMpXmlMessage inMessage = WxMpXmlMessage.fromXml(requestBody);
+            WxMpXmlOutMessage outMessage = this.route(inMessage);
+            if (outMessage == null) {
+                return "";
+            }
+            out = outMessage.toXml();
+        } else if ("aes".equalsIgnoreCase(encType)) {
+            WxMpXmlMessage inMessage = WxMpXmlMessage.fromEncryptedXml(requestBody, wxMpService.getWxMpConfigStorage(),
+                    timestamp, nonce, msgSignature);
+            log.debug("<--消息解密后内容：-->{}", inMessage.toString());
+            WxMpXmlOutMessage outMessage = this.route(inMessage);
+            if (outMessage == null) {
+                return "";
+            }
+            out = outMessage.toEncryptedXml(wxMpService.getWxMpConfigStorage());
         }
+        log.debug("\n 组装回复信息: {}", out);
 
-        return null;
+
+        return out;
 
     }
 
