@@ -8,9 +8,8 @@ import java.io.Serializable;
  * @author wangwei
  * @date 2019/5/5
  */
-public @Data class User implements Serializable {
+public @Data class User extends BaseModel implements Serializable {
 
-    private Integer id;
     private String loginName;
     private String password;
     private String name;
