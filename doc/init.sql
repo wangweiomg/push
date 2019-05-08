@@ -24,3 +24,11 @@ INSERT INTO `sys_users` VALUES ('1', 'sdfsdfsdf', '1', '0');
 INSERT INTO `sys_users` VALUES ('2', 'fdfsdfds', '0', '0');
 INSERT INTO `sys_users` VALUES ('3', 'fhhngff', '0', '0');
 INSERT INTO `sys_users` VALUES ('4', 'dffdf', '0', '1');
+
+CREATE TABLE channel (
+  id int AUTO_INCREMENT PRIMARY KEY ,
+  name VARCHAR(300) NOT NULL COMMENT '通道名称',
+  email VARCHAR(300) NOT NULL COMMENT '邮箱',
+  userid int NOT NULL COMMENT '用户id',
+  sendkey VARCHAR(50) NOT NULL  COMMENT 'sendkey'
+) COMMENT '通道表';

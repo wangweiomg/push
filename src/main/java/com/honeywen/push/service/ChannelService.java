@@ -1,0 +1,15 @@
+package com.honeywen.push.service;
+
+
+import com.honeywen.push.entity.Channel;
+
+/**
+ * @Description 通道管理 服务类
+ * @Author RYF
+ * @Date 2019/5/6
+ **/
+public interface ChannelService {
+
+    boolean addChannel(Channel channel);
+
+}

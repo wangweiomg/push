@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.honeywen.push.mapper.ChannelMapper">
+
+    <resultMap id="BaseResultMap" type="com.honeywen.push.entity.Channel">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="sendkey" property="sendkey" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="columns">
+        id,
+        name,
+        email,
+        userid,
+        sendkey
+    </sql>
+
+    <insert id="addChannel" parameterType="com.honeywen.push.entity.Channel">
+        insert into channel(name,email,userid,sendkey) value (#{name},#{email},#{userid},#{sendkey})
+    </insert>
+</mapper>
