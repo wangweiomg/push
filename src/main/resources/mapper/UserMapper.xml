@@ -18,7 +18,7 @@
         sex,
         sex_desc,
         nickname,
-        avatar_url,
+        head_img_url,
         gender,
         country,
         province,
@@ -78,7 +78,7 @@
         sex,
         sex_desc,
         nickname,
-        avatar_url,
+        head_img_url,
         gender,
         country,
         province,
@@ -98,7 +98,7 @@
         #{openId},
         #{unionId},
         #{nickname},
-        #{avatarUrl},
+        #{headImgUrl},
         #{gender},
         #{country},
         #{province},
@@ -141,8 +141,8 @@
             <if test="nickName != null and nickName != ''">
                 nick_name = #{nickName},
             </if>
-            <if test="avatarUrl != null and avatarUrl != ''">
-                avatar_url = #{avatarUrl},
+            <if test="headImgUrl != null and headImgUrl != ''">
+                head_img_url = #{headImgUrl},
             </if>
             <if test="gender != null">
                 gender = #{gender},
