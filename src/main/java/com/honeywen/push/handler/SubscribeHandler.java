@@ -27,12 +27,13 @@ public class SubscribeHandler extends AbstractHandler {
     public WxMpXmlOutMessage handle(
             WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService,
             WxSessionManager sessionManager) {
-        log.info("<--新关注用户openId-->{}, fromUser-->{}, wxMessage-->{}", wxMessage.getOpenId(), wxMessage.getFromUser(), wxMessage);
+        log.info("<--新关注用户 fromUser-->{}, wxMessage-->{}", wxMessage.getFromUser(), wxMessage);
 
         try {
             WxMpUser wxMpUser = wxMpService.getUserService().userInfo(wxMessage.getFromUser(), null);
             if (wxMpUser != null) {
                 // save to db
+                log.info("<--新关注的用户信息-->{}", wxMpUser);
             }
         } catch (WxErrorException e) {
             log.error("获取用户信息异常！", e);
