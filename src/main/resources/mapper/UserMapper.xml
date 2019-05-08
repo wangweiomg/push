@@ -54,7 +54,7 @@
         <include refid="userColumns"/>
         FROM t_user u
         WHERE 1=1
-        AND u.wx_open_id = #{openId}
+        AND u.open_id = #{openId}
 
     </select>
 
@@ -132,11 +132,11 @@
             <if test="status != null">
                 status = #{status},
             </if>
-            <if test="wxOpenId != null and wxOpenId !=''">
-                wx_open_id = #{wxOpenId},
+            <if test="openId != null and openId !=''">
+                open_id = #{openId},
             </if>
-            <if test="wxUnionId != null and wxUnionId !=''">
-                wx_union_id = #{wxUnionId},
+            <if test="unionId != null and unionId !=''">
+                union_id = #{unionId},
             </if>
             <if test="nickName != null and nickName != ''">
                 nick_name = #{nickName},
