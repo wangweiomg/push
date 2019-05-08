@@ -33,7 +33,7 @@ public class SubscribeHandler extends AbstractHandler {
             WxMpUser wxMpUser = wxMpService.getUserService().userInfo(wxMessage.getFromUser(), null);
             if (wxMpUser != null) {
                 // save to db
-                log.info("<--新关注的用户信息-->{}", wxMpUser);
+                log.info("<--新关注的用户信息-->{}, unionId-->{}", wxMpUser, wxMpUser.getUnionId());
             }
         } catch (WxErrorException e) {
             log.error("获取用户信息异常！", e);
