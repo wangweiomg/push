@@ -29,7 +29,6 @@ CREATE TABLE t_user (
   sex TINYINT(1) COMMENT '1男2女3未知',
   sex_desc VARCHAR (30) COMMENT '性别描述',
   head_img_url VARCHAR(300) COMMENT '用户头像URL',
-  gender TINYINT(1) COMMENT '性别1.男 2女 0未知',
   country VARCHAR(30) COMMENT '用户所在国家',
   province VARCHAR(30) COMMENT '用户所在省份',
   city VARCHAR(30) COMMENT '用户所在城市',
