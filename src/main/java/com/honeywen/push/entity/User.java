@@ -17,15 +17,25 @@ public @Data class User implements Serializable {
     private String email;
     private String mobile;
     private Integer status;
-    private String wxOpenId;
-    private String wxUnionId;
-    private String nickName;
-    private String avatarUrl;
+
+    private String openId;
+    private String unionId;
+    private String nickname;
+    /**
+     * 性别描述信息：男、女、未知等.
+     */
+    private String sexDesc;
+    /**
+     * 性别表示：1，2等数字.
+     */
+    private Integer sex;
+    private String headImgUrl;
     private String gender;
     private String country;
     private String province;
     private String city;
     private String language;
+
 
 
     public boolean isAdmin() {

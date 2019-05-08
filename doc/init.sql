@@ -17,15 +17,17 @@ CREATE DATABASE push DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 DROP TABLE IF EXISTS t_user;
 CREATE TABLE t_user (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '主键',
-  login_name VARCHAR(30) NOT NULL COMMENT '登陆名',
-  password VARCHAR(100) NOT NULL COMMENT '密码',
-  name VARCHAR(30) NOT NULL COMMENT '用户真名',
+  login_name VARCHAR(30) COMMENT '登陆名',
+  password VARCHAR(100) COMMENT '密码',
+  name VARCHAR(30) COMMENT '用户真名',
   email VARCHAR(60) COMMENT '邮箱',
   mobile VARCHAR(30) COMMENT '手机号',
   status tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态 1.启用中 2.已停用',
-  wx_open_id VARCHAR(60) COMMENT '微信open id',
-  wx_union_id VARCHAR(60) COMMENT '微信union id',
-  nick_name VARCHAR(30) COMMENT '用户昵称',
+  open_id VARCHAR(60) COMMENT '微信open id',
+  union_id VARCHAR(60) COMMENT '微信union id',
+  nickname VARCHAR(30) COMMENT '用户昵称',
+  sex TINYINT(1) COMMENT '1男2女3未知',
+  sex_desc VARCHAR (30) COMMENT '性别描述',
   avatar_url VARCHAR(300) COMMENT '用户头像URL',
   gender TINYINT(1) COMMENT '性别1.男 2女 0未知',
   country VARCHAR(30) COMMENT '用户所在国家',
@@ -41,13 +43,11 @@ CREATE TABLE t_user (
   delete_flag tinyint(1) DEFAULT 0 COMMENT '删除标志1.是 0否'
 
 )COMMENT '用户';
-CREATE INDEX idx_user_login_name ON t_user(login_name) ;
 CREATE INDEX idx_user_email ON t_user(email);
 CREATE INDEX idx_user_mobile ON t_user(mobile);
-CREATE INDEX idx_user_wx_union_id ON t_user(wx_union_id);
+CREATE INDEX idx_user_open_id ON t_user(open_id);
+CREATE INDEX idx_user_union_id ON t_user(union_id);
 
--- init user
-INSERT INTO t_user (id, login_name, password, name, email, mobile, status, wx_open_id, wx_union_id, nick_name, avatar_url, gender, country, province, city, language, remark, create_by, create_at, update_by, update_at, delete_flag) VALUES (1, 'admin', '02a3f0772fcca9f415adc990734b45c6f059c7d33ee28362c4852032', 'admin', 'wangwei_omg@163.com', '18911580722', 1, null, null, '取个好名字', null, 1, null, null, null, null, null, 1, now(), 1, now(), 0);
 
 DROP TABLE IF EXISTS sys_dict;
 CREATE TABLE sys_dict (

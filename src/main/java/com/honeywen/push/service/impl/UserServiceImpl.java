@@ -23,4 +23,28 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return userMapper.findAll();
     }
+
+    @Override
+    public void save(User user) {
+        userMapper.save(user);
+    }
+
+    @Override
+    public void saveOrUpdate(User user) {
+
+        if (isExist(user.getOpenId())) {
+            userMapper.update(user);
+        } else {
+            userMapper.save(user);
+        }
+
+    }
+
+    @Override
+    public boolean isExist(String openId) {
+
+        return userMapper.findByOpenId(openId) != null;
+    }
+
+
 }
