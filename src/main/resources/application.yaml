@@ -4,8 +4,6 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   config-location: classpath:mybatis-config.xml
-  configuration:
-    map-underscore-to-camel-case: true
 logging:
   config: classpath:logback-spring.xml
   path: ~/logs/push-wechat
