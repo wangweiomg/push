@@ -52,6 +52,7 @@ public class PublishController {
             // 通过key找通道，找到要接收人
             List<User> users = userService.findAll();
             for (User user : users) {
+                log.debug("toUser, nickname-->{}, openId-->{}", user.getNickname(), user.getOpenId());
                 msg.setToUser(user.getOpenId());
                 wxMpService.getTemplateMsgService().sendTemplateMsg(msg);
             }
