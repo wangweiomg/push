@@ -1,16 +1,17 @@
 package com.honeywen.push.controller;
 
 import com.google.common.collect.Lists;
-import com.honeywen.push.entity.Account;
-import com.honeywen.push.service.AccountService;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.WxMpUserQuery;
+import me.chanjar.weixin.mp.bean.kefu.WxMpKefuMessage;
+import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -24,11 +25,10 @@ import java.util.List;
  * @author wangwei
  * @date 2019/4/20
  */
+@Slf4j
 @RestController
 public class AccountController {
 
-    @Autowired
-    private AccountService accountService;
     @Autowired
     private WxMpService wxMpService;
 
@@ -36,6 +36,8 @@ public class AccountController {
     private String template2 = "VrmkUnF0pyVlHKwK-1nIURYioBQSioYF3dJAk6f6D0A";
 //    private String template3 = "waz4TzcmYxU32_FPvb3fQ2mC9zqMIdV45yH4MhB6UAQ";
     private String template3 = "awwsyi8C6UFIPD1F1PT8aJrHPtiqP3-UoVWLxf9JsIg";
+
+    private String wangweixiongdi = "odnyi57JGJQijGo7QdnbeUgq5ohQ";
 
 
     @GetMapping("/msg")
@@ -63,38 +65,22 @@ public class AccountController {
         WxMpTemplateData keyword4 = new WxMpTemplateData("keyword4", "信用卡");
         WxMpTemplateData remark = new WxMpTemplateData("remark", "感谢您的惠顾");
         List<WxMpTemplateData> list = Lists.newArrayList(first, keyword1, keyword2, keyword3, keyword4, remark);
-        WxMpUserQuery query = new WxMpUserQuery();
 
         try {
-            List<WxMpUser> userList = wxMpService.getUserService().userInfoList(query);
-            for (WxMpUser user: userList) {
-                System.out.println(user.getNickname() +"-->" + user.getOpenId());
-            }
+            String accessToken = wxMpService.getAccessToken();
+            log.info("<--accessToken-->{}", accessToken);
+            System.out.println("<--accessToken-->" + accessToken);
 
-            WxMpTemplateMessage templateMessage3 = WxMpTemplateMessage.builder().templateId(template3).toUser(userList.get(0).getOpenId()).data(list).build();
+
+            WxMpTemplateMessage templateMessage3 = WxMpTemplateMessage.builder().templateId(template3).toUser(wangweixiongdi).data(list).build();
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage3);
+
+            WxMpKefuMessage kefu1 = WxMpKefuMessage.TEXT().content("hello world kefu ").toUser(wangweixiongdi).build();
+            wxMpService.getKefuService().sendKefuMessage(kefu1);
 
         } catch (WxErrorException e) {
             e.printStackTrace();
         }
-
-    }
-
-
-
-
-    @GetMapping("/hello")
-    public String test() {
-        return "hello world!";
-    }
-
-
-    @GetMapping("/account")
-    public List<Account> getAccount() {
-
-        List<Account> list = accountService.findAll();
-        
-        return list;
 
     }
 

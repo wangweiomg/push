@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间 是必须的 -->
+<mapper namespace="com.honeywen.push.dao.UserMapper">
+
+    <sql id="userColumns">
+        id,
+        login_name,
+        password,
+        name,
+        email,
+        mobile,
+        status,
+        open_id,
+        union_id,
+        sex,
+        sex_desc,
+        nickname,
+        head_img_url,
+        country,
+        province,
+        city,
+        language,
+        remark,
+        create_by,
+        create_at,
+        update_by,
+        update_at,
+        delete_flag
+    </sql>
+
+    <select id="findAll" resultType="com.honeywen.push.entity.User">
+        SELECT
+        <include refid="userColumns"/>
+        FROM t_user u
+        WHERE 1=1
+        AND delete_flag = 0
+    </select>
+
+    <select id="findByLoginName" parameterType="java.lang.String" resultType="com.honeywen.push.entity.User">
+        SELECT
+        <include refid="userColumns"/>
+        FROM t_user u
+        WHERE 1=1
+        AND u.login_name = #{loginName}
+
+    </select>
+
+    <select id="findByOpenId" parameterType="java.lang.String" resultType="com.honeywen.push.entity.User">
+        SELECT
+        <include refid="userColumns"/>
+        FROM t_user u
+        WHERE 1=1
+        AND u.open_id = #{openId}
+
+    </select>
+
+    <select id="findById" parameterType="java.lang.Integer" resultType="com.honeywen.push.entity.User">
+        SELECT
+        <include refid="userColumns"/>
+        FROM t_user u
+        WHERE 1=1
+        AND u.id = #{id}
+    </select>
+
+    <insert id="save" parameterType="com.honeywen.push.entity.User" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO t_user (
+        login_name,
+        password,
+        name,
+        email,
+        mobile,
+        open_id,
+        union_id,
+        nickname,
+        sex,
+        sex_desc,
+        head_img_url,
+        country,
+        province,
+        city,
+        language,
+        remark,
+        create_by,
+        create_at,
+        delete_flag
+        )
+        VALUES(
+        #{loginName},
+        #{password},
+        #{name},
+        #{email},
+        #{mobile},
+        #{openId},
+        #{unionId},
+        #{nickname},
+        #{sex},
+        #{sexDesc},
+        #{headImgUrl},
+        #{country},
+        #{province},
+        #{city},
+        #{language},
+        #{remark},
+        #{createBy},
+        NOW(),
+        0
+        )
+    </insert>
+
+    <update id="update" parameterType="com.honeywen.push.entity.User">
+        UPDATE t_user
+        <set>
+            <if test="loginName != null">
+                login_name = #{loginName},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="mobile != null and mobile != ''">
+                mobile = #{mobile},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="openId != null and openId !=''">
+                open_id = #{openId},
+            </if>
+            <if test="unionId != null and unionId !=''">
+                union_id = #{unionId},
+            </if>
+            <if test="nickname != null and nickname != ''">
+                nick_name = #{nickname},
+            </if>
+            <if test="headImgUrl != null and headImgUrl != ''">
+                head_img_url = #{headImgUrl},
+            </if>
+            <if test="country != null and country !=''">
+                country = #{country},
+            </if>
+            <if test="province != null">
+                province = #{province},
+            </if>
+            <if test="city != null">
+                city = #{city},
+            </if>
+            <if test="language != null">
+                language = #{language},
+            </if>
+            update_by = #{updateBy},
+            update_at = NOW()
+        </set>
+        WHERE id = #{id}
+    </update>
+
+</mapper>

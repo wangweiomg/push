@@ -1,4 +1,4 @@
-package com.honeywen.push.mapper;
+package com.honeywen.push.dao;
 
 import com.honeywen.push.entity.Channel;
 import com.honeywen.push.entity.SysUser;

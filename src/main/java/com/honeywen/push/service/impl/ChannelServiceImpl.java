@@ -1,11 +1,11 @@
 package com.honeywen.push.service.impl;
 
 import com.honeywen.push.entity.Channel;
-import com.honeywen.push.mapper.ChannelMapper;
+import com.honeywen.push.dao.ChannelMapper;
 import com.honeywen.push.service.ChannelService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class ChannelServiceImpl implements ChannelService {
 
-    @Resource
+    @Autowired
     private ChannelMapper channelMapper;
 
     @Override

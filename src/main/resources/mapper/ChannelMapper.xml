@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.honeywen.push.mapper.ChannelMapper">
+<mapper namespace="com.honeywen.push.dao.ChannelMapper">
 
     <resultMap id="BaseResultMap" type="com.honeywen.push.entity.Channel">
         <id column="id" property="id" jdbcType="INTEGER"/>

@@ -7,3 +7,6 @@ mybatis:
 logging:
   config: classpath:logback-spring.xml
   path: ~/logs/push-wechat
+
+wx:
+  verifyFile: nPamSDXCVOlXvM6C
