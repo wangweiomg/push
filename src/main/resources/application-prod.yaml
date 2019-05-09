@@ -42,3 +42,5 @@ wx:
     aesKey:
     # 订单提醒
     template1: awwsyi8C6UFIPD1F1PT8aJrHPtiqP3-UoVWLxf9JsIg
+    # 绑定会员通知，也就是消息发送接口
+    template2: a3GojMk3ZEU_g6aT--XJNhqN2Mvb-ZeBqiUymkDdS_M
