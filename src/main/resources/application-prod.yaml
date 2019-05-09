@@ -44,3 +44,5 @@ wx:
     template1: awwsyi8C6UFIPD1F1PT8aJrHPtiqP3-UoVWLxf9JsIg
     # 绑定会员通知，也就是消息发送接口
     template2: a3GojMk3ZEU_g6aT--XJNhqN2Mvb-ZeBqiUymkDdS_M
+    # 服务器运行状态通知
+    template3: U6PiWYsXGxNAZ2_BWeQHVpz1LfTgYI0CizIf0E-dqcQ

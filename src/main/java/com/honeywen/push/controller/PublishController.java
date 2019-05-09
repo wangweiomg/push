@@ -28,7 +28,7 @@ import java.util.List;
 @RestController
 public class PublishController {
 
-    @Value("${wx.mp.template2}")
+    @Value("${wx.mp.template3}")
     private String template2;
 
     @Autowired
@@ -41,7 +41,7 @@ public class PublishController {
 
 
         WxMpTemplateData first = new WxMpTemplateData("first", title);
-        WxMpTemplateData keyword1 = new WxMpTemplateData("keyword1", "88888888");
+        WxMpTemplateData keyword1 = new WxMpTemplateData("keyword1", "正常");
         WxMpTemplateData keyword2 = new WxMpTemplateData("keyword2", DateTimeFormatter.ofPattern("MM月dd日HH:mm").format(LocalDateTime.now()));
         WxMpTemplateData remark = new WxMpTemplateData("remark", content);
         List<WxMpTemplateData> list = Lists.newArrayList(first, keyword1, keyword2, remark);
