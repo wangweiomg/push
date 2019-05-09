@@ -137,8 +137,8 @@
             <if test="unionId != null and unionId !=''">
                 union_id = #{unionId},
             </if>
-            <if test="nickName != null and nickName != ''">
-                nick_name = #{nickName},
+            <if test="nickname != null and nickname != ''">
+                nick_name = #{nickname},
             </if>
             <if test="headImgUrl != null and headImgUrl != ''">
                 head_img_url = #{headImgUrl},
