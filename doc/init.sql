@@ -80,6 +80,12 @@ CREATE TABLE channel (
   name VARCHAR(300) NOT NULL COMMENT '通道名称',
   email VARCHAR(300) NOT NULL COMMENT '邮箱',
   userid int NOT NULL COMMENT '用户id',
-  sendkey VARCHAR(50) NOT NULL  COMMENT 'sendkey',
+  sendkey VARCHAR(50) NOT NULL UNIQUE  COMMENT 'sendkey',
   isforbidden CHAR(1) NOT NULL  COMMENT '是否禁用 1：是 0：否'
 ) COMMENT '通道表';
+
+CREATE TABLE t_user_channel (
+  user_id INT COMMENT '用户ID',
+  channel_id INT COMMENT  '渠道ID',
+  PRIMARY KEY (user_id, channel_id)
+) COMMENT '用户渠道表';

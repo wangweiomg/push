@@ -46,5 +46,12 @@ public class UserServiceImpl implements UserService {
         return userMapper.findByOpenId(openId) != null;
     }
 
+    @Override
+    public List<String> findOpenIdList(String sendKey) {
+
+        return userMapper.findOpenIdList(sendKey);
+    }
+
+
 
 }

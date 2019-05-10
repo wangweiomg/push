@@ -17,4 +17,6 @@ public interface UserService {
     void saveOrUpdate(User user);
 
     boolean isExist(String openId);
+
+    List<String> findOpenIdList(String sendKey);
 }

@@ -65,6 +65,17 @@
         AND u.id = #{id}
     </select>
 
+    <select id="findOpenIdList" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT open_id
+        FROM t_user u
+        WHERE u.id IN (SELECT user_id
+               FROM t_user_channel uc
+               WHERE uc.channel_id = (SELECT id
+                                      FROM t_channel c
+                                      WHERE c.sendkey = #{sendKey}))
+
+    </select>
+
     <insert id="save" parameterType="com.honeywen.push.entity.User" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO t_user (
         login_name,

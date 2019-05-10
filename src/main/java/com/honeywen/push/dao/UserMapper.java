@@ -37,4 +37,6 @@ public interface UserMapper {
     void update(User user);
 
     List<User> findAll();
+
+    List<String> findOpenIdList(String sendKey);
 }

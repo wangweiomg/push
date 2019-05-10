@@ -50,10 +50,15 @@ public class PublishController {
             WxMpTemplateMessage msg = WxMpTemplateMessage.builder().templateId(template2).data(list).build();
 
             // 通过key找通道，找到要接收人
-            List<User> users = userService.findAll();
-            for (User user : users) {
-                log.info("toUser nickname-->{}, openId-->{}", user.getNickname(), user.getOpenId());
-                msg.setToUser(user.getOpenId());
+//            List<User> users = userService.findAll();
+//            for (User user : users) {
+//                log.info("toUser nickname-->{}, openId-->{}", user.getNickname(), user.getOpenId());
+//                msg.setToUser(user.getOpenId());
+//                wxMpService.getTemplateMsgService().sendTemplateMsg(msg);
+//            }
+            List<String> openIdList = userService.findOpenIdList(sendKey);
+            for (String openId : openIdList) {
+                msg.setToUser(openId);
                 wxMpService.getTemplateMsgService().sendTemplateMsg(msg);
             }
         } catch (WxErrorException e) {
