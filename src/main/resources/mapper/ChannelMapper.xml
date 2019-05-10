@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.honeywen.push.dao.ChannelMapper">
+
+    <resultMap id="BaseResultMap" type="com.honeywen.push.entity.Channel">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="sendkey" property="sendkey" jdbcType="VARCHAR"/>
+        <result column="isforbidden" property="isforbidden" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="columns">
+        id,
+        name,
+        email,
+        userid,
+        sendkey,
+        isforbidden
+    </sql>
+
+    <insert id="addChannel" parameterType="com.honeywen.push.entity.Channel">
+        insert into channel(name,email,userid,sendkey,isforbidden) value (#{name},#{email},#{userid},#{sendkey},#{isforbidden})
+    </insert>
+
+    <select id="getChannel" parameterType="Integer" resultMap="BaseResultMap">
+        select <include refid="columns" /> from channel where userid = #{userid}
+    </select>
+
+    <select id="getChannelByName" parameterType="com.honeywen.push.entity.Channel" resultMap="BaseResultMap">
+        select <include refid="columns"/> from channel where name =#{name} and userid = #{userid}
+    </select>
+
+    <select id="getChannelById" parameterType="com.honeywen.push.entity.Channel" resultMap="BaseResultMap">
+        select <include refid="columns"/> from channel where id =#{id} and userid = #{userid}
+    </select>
+
+    <update id="editChannel" parameterType="com.honeywen.push.entity.Channel">
+        update channel set name = #{name} , email=#{email},isforbidden=#{isforbidden} where id=#{id} and userid = #{userid}
+    </update>
+
+    <delete id="deleteChannelById" parameterType="com.honeywen.push.entity.Channel">
+        delete from channel where id = #{id} and userid = #{userid}
+    </delete>
+</mapper>
