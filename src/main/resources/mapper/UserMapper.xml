@@ -172,4 +172,9 @@
         WHERE id = #{id}
     </update>
 
+
+    <insert id="saveUserChannel">
+        INSERT INTO t_user_channel (user_id, channel_id) VALUES(#{userId}, #{channelId})
+    </insert>
+
 </mapper>

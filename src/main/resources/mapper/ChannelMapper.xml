@@ -6,8 +6,8 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
-        <result column="userid" property="userid" jdbcType="INTEGER"/>
-        <result column="sendkey" property="sendkey" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="send_key" property="sendKey" jdbcType="VARCHAR"/>
         <result column="isforbidden" property="isforbidden" jdbcType="VARCHAR"/>
     </resultMap>
 
@@ -15,32 +15,49 @@
         id,
         name,
         email,
-        userid,
-        sendkey,
+        user_id,
+        send_key,
         isforbidden
     </sql>
 
-    <insert id="addChannel" parameterType="com.honeywen.push.entity.Channel">
-        insert into channel(name,email,userid,sendkey,isforbidden) value (#{name},#{email},#{userid},#{sendkey},#{isforbidden})
+    <insert id="addChannel" parameterType="com.honeywen.push.entity.Channel" useGeneratedKeys="true" keyProperty="id">
+        insert into t_channel(
+          name,
+          email,
+          user_id,
+          send_key,
+          isforbidden)
+          values (
+            #{name},
+            #{email},
+            #{userId},
+            #{sendKey},
+            #{isforbidden})
     </insert>
 
     <select id="getChannel" parameterType="Integer" resultMap="BaseResultMap">
-        select <include refid="columns" /> from channel where userid = #{userid}
+        select
+        <include refid="columns"/>
+        from t_channel where user_id = #{userId}
     </select>
 
     <select id="getChannelByName" parameterType="com.honeywen.push.entity.Channel" resultMap="BaseResultMap">
-        select <include refid="columns"/> from channel where name =#{name} and userid = #{userid}
+        select
+        <include refid="columns"/>
+        from t_channel where name =#{name} and user_id = #{userId}
     </select>
 
     <select id="getChannelById" parameterType="com.honeywen.push.entity.Channel" resultMap="BaseResultMap">
-        select <include refid="columns"/> from channel where id =#{id} and userid = #{userid}
+        select
+        <include refid="columns"/>
+        from t_channel where id =#{id} and user_id = #{userId}
     </select>
 
     <update id="editChannel" parameterType="com.honeywen.push.entity.Channel">
-        update channel set name = #{name} , email=#{email},isforbidden=#{isforbidden} where id=#{id} and userid = #{userid}
+        update t_channel set name = #{name} , email=#{email},isforbidden=#{isforbidden} where id=#{id} and user_id = #{userId}
     </update>
 
     <delete id="deleteChannelById" parameterType="com.honeywen.push.entity.Channel">
-        delete from channel where id = #{id} and userid = #{userid}
+        delete from t_channel where id = #{id} and user_id = #{userId}
     </delete>
 </mapper>

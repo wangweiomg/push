@@ -1,7 +1,6 @@
 package com.honeywen.push.controller;
 
 import com.google.common.collect.Lists;
-import com.honeywen.push.entity.User;
 import com.honeywen.push.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -62,7 +61,6 @@ public class PublishController {
                 wxMpService.getTemplateMsgService().sendTemplateMsg(msg);
             }
         } catch (WxErrorException e) {
-            e.printStackTrace();
             log.error("发送消息异常", e);
         }
 

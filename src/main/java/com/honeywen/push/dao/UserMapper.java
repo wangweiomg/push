@@ -1,6 +1,7 @@
 package com.honeywen.push.dao;
 
 import com.honeywen.push.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -39,4 +40,11 @@ public interface UserMapper {
     List<User> findAll();
 
     List<String> findOpenIdList(String sendKey);
+
+    /**
+     * 保存用户渠道
+     * @param userId
+     * @param channelId
+     */
+    void saveUserChannel(@Param("userId") Integer userId, @Param("channelId") Integer channelId);
 }

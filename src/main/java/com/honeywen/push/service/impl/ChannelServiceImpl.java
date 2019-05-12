@@ -1,5 +1,6 @@
 package com.honeywen.push.service.impl;
 
+import com.honeywen.push.dao.UserMapper;
 import com.honeywen.push.entity.Channel;
 import com.honeywen.push.dao.ChannelMapper;
 import com.honeywen.push.service.ChannelService;
@@ -18,6 +19,8 @@ public class ChannelServiceImpl implements ChannelService {
 
     @Autowired
     private ChannelMapper channelMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public int addChannel(Channel channel) {
@@ -27,6 +30,10 @@ public class ChannelServiceImpl implements ChannelService {
             return 1;
         }
         boolean flag = channelMapper.addChannel(channel);
+        // 默认保存管理员为通道第一个用户
+        userMapper.saveUserChannel(channel.getUserId(), channel.getId());
+
+
         if(flag){
             return 0;
         }else{
@@ -35,8 +42,8 @@ public class ChannelServiceImpl implements ChannelService {
     }
 
     @Override
-    public List<Channel> getChannel(Integer userid) {
-        return channelMapper.getChannel(userid);
+    public List<Channel> getChannel(Integer userId) {
+        return channelMapper.getChannel(userId);
     }
 
     @Override

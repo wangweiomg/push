@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @Author RYF
@@ -78,9 +79,10 @@ public class ChannelController {
         }
         channel.setIsforbidden("0");
         //获取用户id todo
-        channel.setUserid(1);
+        channel.setUserId(1);
         //生成sendkey todo
-        channel.setSendkey("dddd");
+        String key = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+        channel.setSendKey(key);
         int flag = channelService.addChannel(channel);
         return returnResutl(flag);
     }
@@ -108,7 +110,7 @@ public class ChannelController {
         channel.setId(id);
         //获取用户id todo
         Integer userid = 1;
-        channel.setUserid(userid);
+        channel.setUserId(userid);
 
         Channel channel1 = channelService.getChannelById(channel);
         return ResultUtil.success(channel1);
@@ -127,7 +129,7 @@ public class ChannelController {
             return rs;
         }
         //获取用户id todo
-        channel.setUserid(1);
+        channel.setUserId(1);
         int flag = channelService.editChannel(channel);
         return returnResutl(flag);
     }
@@ -138,7 +140,7 @@ public class ChannelController {
         channel.setId(id);
         //获取用户id todo
         Integer userid = 1;
-        channel.setUserid(userid);
+        channel.setUserId(userid);
 
         int flag = channelService.deleteChannelById(channel);
         if(0 == flag ){
