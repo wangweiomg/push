@@ -43,8 +43,10 @@ public class MsgHandler extends AbstractHandler {
 //        String content = "收到消息内容： " + JSON.toJSONString(wxMessage);
         String content = "你是那天边最美的云彩, " + wxMessage.getContent();
 
-        log.info("<--msgHandler最后回复-->");
 
-        return new TextBuilder().build(content, wxMessage, wxMpService);
+        WxMpXmlOutMessage msg = new TextBuilder().build(content, wxMessage, wxMpService);
+
+        log.info("<--msgHandler最后回复-->{}", msg);
+        return msg;
     }
 }
