@@ -20,6 +20,7 @@ public class KefuSessionHandler extends AbstractHandler {
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) throws WxErrorException {
 
+        log.info("<--KefuSessionHandler 被调用了-->{}", wxMessage.getContent());
 
         return null;
     }

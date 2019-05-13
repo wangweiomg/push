@@ -34,6 +34,7 @@ public class SubscribeHandler extends AbstractHandler {
     public WxMpXmlOutMessage handle(
             WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService,
             WxSessionManager sessionManager) {
+        log.info("<--SubscribeHandler 被调用了-->{}", wxMessage.getContent());
         log.info("<--新关注用户 fromUser-->{}, wxMessage-->{}", wxMessage.getFromUser(), wxMessage);
 
         try {

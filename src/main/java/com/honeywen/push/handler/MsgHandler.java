@@ -24,6 +24,7 @@ public class MsgHandler extends AbstractHandler {
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) throws WxErrorException {
 
+        log.info("<--MsgHandler 被调用了-->{}", wxMessage.getContent());
         if (!wxMessage.getMsgType().equals(WxConsts.XmlMsgType.EVENT)) {
             // TODO save to db
         }
