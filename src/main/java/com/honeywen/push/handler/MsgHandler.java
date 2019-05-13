@@ -29,17 +29,21 @@ public class MsgHandler extends AbstractHandler {
             // TODO save to db
         }
         //
+        log.info("<--kfonline-->{}", wxMpService.getKefuService().kfOnlineList());
         if (StringUtils.startsWithAny(wxMessage.getContent(), "你好", "客服", "hello")
                 && wxMpService.getKefuService().kfOnlineList()
                 .getKfOnlineList().size() > 0) {
-            log.info("<--kfonline-->{}", wxMpService.getKefuService().kfOnlineList());
+            log.info("<--走了kfonline消息-->>");
             return WxMpXmlOutMessage.TRANSFER_CUSTOMER_SERVICE()
                     .fromUser(wxMessage.getToUser())
                     .toUser(wxMessage.getFromUser()).build();
         }
 
         // 组装回复消息
-        String content = "收到消息内容： " + JSON.toJSONString(wxMessage);
+//        String content = "收到消息内容： " + JSON.toJSONString(wxMessage);
+        String content = "你是那天边最美的云彩, " + wxMessage.getContent();
+
+        log.info("<--msgHandler最后回复-->");
 
         return new TextBuilder().build(content, wxMessage, wxMpService);
     }
