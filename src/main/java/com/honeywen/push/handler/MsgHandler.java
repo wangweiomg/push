@@ -1,5 +1,7 @@
 package com.honeywen.push.handler;
 
+import com.alibaba.fastjson.JSON;
+import com.honeywen.push.builder.TextBuilder;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -7,6 +9,7 @@ import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -25,7 +28,17 @@ public class MsgHandler extends AbstractHandler {
             // TODO save to db
         }
         //
+        if (StringUtils.startsWithAny(wxMessage.getContent(), "你好", "客服", "hello")
+                && wxMpService.getKefuService().kfOnlineList()
+                .getKfOnlineList().size() > 0) {
+            return WxMpXmlOutMessage.TRANSFER_CUSTOMER_SERVICE()
+                    .fromUser(wxMessage.getToUser())
+                    .toUser(wxMessage.getFromUser()).build();
+        }
 
-        return null;
+        // 组装回复消息
+        String content = "收到消息内容： " + JSON.toJSONString(wxMessage);
+
+        return new TextBuilder().build(content, wxMessage, wxMpService);
     }
 }

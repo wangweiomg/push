@@ -1,6 +1,8 @@
 package com.honeywen.push.config;
 
 import com.google.common.collect.Maps;
+import com.honeywen.push.handler.MsgHandler;
+import com.honeywen.push.handler.ScanHandler;
 import com.honeywen.push.handler.SubscribeHandler;
 import static me.chanjar.weixin.common.api.WxConsts.*;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
@@ -34,13 +36,17 @@ public class WxMpConfiguration {
     private String templateOrderNotice;
 
     private SubscribeHandler subscribeHandler;
+    private ScanHandler scanHandler;
+    private MsgHandler msgHandler;
 
     private static Map<String, WxMpMessageRouter> routers = Maps.newHashMap();
     private static Map<String, WxMpService> mpServices = Maps.newHashMap();
 
     @Autowired
-    public WxMpConfiguration(SubscribeHandler subscribeHandler) {
+    public WxMpConfiguration(SubscribeHandler subscribeHandler, ScanHandler scanHandler, MsgHandler msgHandler) {
         this.subscribeHandler = subscribeHandler;
+        this.scanHandler = scanHandler;
+        this.msgHandler = msgHandler;
     }
 
 
@@ -70,8 +76,15 @@ public class WxMpConfiguration {
 
         // 关注事件
         newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
-                .event(EventType.SUBSCRIBE).handler(subscribeHandler)
-                .end();
+                .event(EventType.SUBSCRIBE).handler(subscribeHandler).end();
+
+        // 扫码事件
+        newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
+                .event(EventType.SCAN).handler(this.scanHandler).end();
+
+        // 默认
+        newRouter.rule().async(false).handler(this.msgHandler).end();
+
 
         return newRouter;
     }
