@@ -47,6 +47,7 @@ public class MsgHandler extends AbstractHandler {
         WxMpXmlOutMessage msg = new TextBuilder().build(content, wxMessage, wxMpService);
 
         log.info("<--msgHandler最后回复-->{}", msg);
-        return new me.chanjar.weixin.mp.builder.outxml.TextBuilder().content(content).toUser(wxMessage.getFromUser()).build();
+
+        return msg;
     }
 }
