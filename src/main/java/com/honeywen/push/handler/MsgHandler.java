@@ -32,6 +32,7 @@ public class MsgHandler extends AbstractHandler {
         if (StringUtils.startsWithAny(wxMessage.getContent(), "你好", "客服", "hello")
                 && wxMpService.getKefuService().kfOnlineList()
                 .getKfOnlineList().size() > 0) {
+            log.info("<--kfonline-->{}", wxMpService.getKefuService().kfOnlineList());
             return WxMpXmlOutMessage.TRANSFER_CUSTOMER_SERVICE()
                     .fromUser(wxMessage.getToUser())
                     .toUser(wxMessage.getFromUser()).build();
