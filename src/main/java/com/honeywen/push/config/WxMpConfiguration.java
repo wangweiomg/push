@@ -1,6 +1,7 @@
 package com.honeywen.push.config;
 
 import com.google.common.collect.Maps;
+import com.honeywen.push.handler.KefuSessionHandler;
 import com.honeywen.push.handler.MsgHandler;
 import com.honeywen.push.handler.ScanHandler;
 import com.honeywen.push.handler.SubscribeHandler;
@@ -9,6 +10,7 @@ import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
+import me.chanjar.weixin.mp.constant.WxMpEventConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -35,6 +37,7 @@ public class WxMpConfiguration {
     @Value("${wx.mp.template1}")
     private String templateOrderNotice;
 
+    private KefuSessionHandler kefuSessionHandler;
     private SubscribeHandler subscribeHandler;
     private ScanHandler scanHandler;
     private MsgHandler msgHandler;
@@ -43,10 +46,12 @@ public class WxMpConfiguration {
     private static Map<String, WxMpService> mpServices = Maps.newHashMap();
 
     @Autowired
-    public WxMpConfiguration(SubscribeHandler subscribeHandler, ScanHandler scanHandler, MsgHandler msgHandler) {
+    public WxMpConfiguration(SubscribeHandler subscribeHandler, ScanHandler scanHandler, MsgHandler msgHandler,
+                             KefuSessionHandler kefuSessionHandler) {
         this.subscribeHandler = subscribeHandler;
         this.scanHandler = scanHandler;
         this.msgHandler = msgHandler;
+        this.kefuSessionHandler = kefuSessionHandler;
     }
 
 
@@ -73,6 +78,18 @@ public class WxMpConfiguration {
     @Bean
     public WxMpMessageRouter messageRouter(WxMpService wxMpService) {
         final WxMpMessageRouter newRouter = new WxMpMessageRouter(wxMpService);
+
+        // 客服
+        newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
+                .event(WxMpEventConstants.CustomerService.KF_CREATE_SESSION)
+                .handler(this.kefuSessionHandler).end();
+        newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
+                .event(WxMpEventConstants.CustomerService.KF_CLOSE_SESSION)
+                .handler(this.kefuSessionHandler).end();
+        newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
+                .event(WxMpEventConstants.CustomerService.KF_SWITCH_SESSION)
+                .handler(this.kefuSessionHandler).end();
+
 
         // 关注事件
         newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
