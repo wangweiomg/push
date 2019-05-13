@@ -44,6 +44,7 @@ public class MsgHandler extends AbstractHandler {
 
 
         WxMpXmlOutMessage msg = new TextBuilder().build(content, wxMessage, wxMpService);
+        msg.setCreateTime(System.currentTimeMillis());
         log.info("<--msgHandler最后回复-->{}", msg);
 
 
