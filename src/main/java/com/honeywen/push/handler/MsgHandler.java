@@ -45,7 +45,9 @@ public class MsgHandler extends AbstractHandler {
 
         WxMpXmlOutMessage msg = new TextBuilder().build(content, wxMessage, wxMpService);
         log.info("<--msgHandler最后回复-->{}", msg);
-        return msg;
+//        return msg;
+        // 接入了图灵机器人测试
+        return null;
 
 
     }

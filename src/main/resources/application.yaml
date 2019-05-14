@@ -10,3 +10,8 @@ logging:
 
 wx:
   verifyFile: nPamSDXCVOlXvM6C
+
+tuling:
+  apiKey: 92abc57cc89f487189e7b6e26de8d6b6
+  secret: 78246b95781084d3
+  url: http://openapi.tuling123.com/openapi/api/v2
