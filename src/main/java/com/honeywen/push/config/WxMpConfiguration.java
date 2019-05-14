@@ -1,6 +1,5 @@
 package com.honeywen.push.config;
 
-import com.google.common.collect.Maps;
 import com.honeywen.push.handler.KefuSessionHandler;
 import com.honeywen.push.handler.MsgHandler;
 import com.honeywen.push.handler.ScanHandler;
@@ -16,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Map;
 
 /**
  * @author wangwei
@@ -41,9 +39,6 @@ public class WxMpConfiguration {
     private SubscribeHandler subscribeHandler;
     private ScanHandler scanHandler;
     private MsgHandler msgHandler;
-
-    private static Map<String, WxMpMessageRouter> routers = Maps.newHashMap();
-    private static Map<String, WxMpService> mpServices = Maps.newHashMap();
 
     @Autowired
     public WxMpConfiguration(SubscribeHandler subscribeHandler, ScanHandler scanHandler, MsgHandler msgHandler,
