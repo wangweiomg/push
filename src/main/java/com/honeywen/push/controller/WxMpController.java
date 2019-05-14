@@ -78,8 +78,9 @@ public class WxMpController {
 
 
     private WxMpXmlOutMessage route(WxMpXmlMessage message) {
-        messageRouter.route(message);
-        return null;
+
+
+        return messageRouter.route(message);
 
     }
 
