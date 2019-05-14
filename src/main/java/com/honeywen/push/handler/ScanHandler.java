@@ -21,7 +21,9 @@ public class ScanHandler extends AbstractHandler {
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService,
                                     WxSessionManager sessionManager) throws WxErrorException {
 
-        log.info("<--ScanHandler 被调用了-->{}", wxMessage.getContent());
+        log.info("<--ScanHandler 被调用了wxMessage-->{}", wxMessage);
+        log.info("<--ScanHandler 被调用了context-->{}", context);
+
         // 扫码事件处理
         return null;
     }
