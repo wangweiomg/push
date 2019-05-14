@@ -26,8 +26,6 @@ public class ScanHandler extends AbstractHandler {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private ChannelService channelService;
 
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService,
@@ -42,6 +40,7 @@ public class ScanHandler extends AbstractHandler {
         userService.saveOrUpdate(user);
 
         String ticket = wxMessage.getTicket();
+        // 扫完码登录，跳转到通道页面
 
 
 
