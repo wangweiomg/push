@@ -44,5 +44,17 @@ public @Data class Channel {
      */
     private String oldname;
 
+    /**
+     * 通道的二维码ticket
+     */
+    private String ticket;
+
+    private String qrcodeUrl;
+
+
+    public String getQrcodeUrl() {
+        return "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + this.getTicket();
+    }
+
 
 }

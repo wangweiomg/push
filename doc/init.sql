@@ -72,7 +72,8 @@ CREATE TABLE t_channel (
   email VARCHAR(300) NOT NULL COMMENT '邮箱',
   user_id int NOT NULL COMMENT '用户id',
   send_key VARCHAR(50) NOT NULL UNIQUE  COMMENT 'sendkey',
-  isforbidden CHAR(1) NOT NULL  COMMENT '是否禁用 1：是 0：否'
+  isforbidden CHAR(1) NOT NULL  COMMENT '是否禁用 1：是 0：否',
+  ticket VARCHAR
 ) COMMENT '通道表';
 
 CREATE TABLE t_user_channel (

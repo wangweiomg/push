@@ -4,6 +4,10 @@ import com.honeywen.push.dao.UserMapper;
 import com.honeywen.push.entity.Channel;
 import com.honeywen.push.dao.ChannelMapper;
 import com.honeywen.push.service.ChannelService;
+import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.bean.result.WxMpQrCodeTicket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,7 @@ import java.util.List;
  * @Description 通道管理服务实现类
  * @Date 2019-05-07 22:51
  **/
+@Slf4j
 @Service
 public class ChannelServiceImpl implements ChannelService {
 
@@ -21,6 +26,8 @@ public class ChannelServiceImpl implements ChannelService {
     private ChannelMapper channelMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private WxMpService wxMpService;
 
     @Override
     public int addChannel(Channel channel) {
@@ -30,8 +37,17 @@ public class ChannelServiceImpl implements ChannelService {
             return 1;
         }
         boolean flag = channelMapper.addChannel(channel);
+
         // 默认保存管理员为通道第一个用户
         userMapper.saveUserChannel(channel.getUserId(), channel.getId());
+
+        try {
+            WxMpQrCodeTicket ticket = wxMpService.getQrcodeService().qrCodeCreateLastTicket(channel.getId());
+        } catch (WxErrorException e) {
+            log.error("创建qrcode失败", e);
+
+        }
+//        channelMapper.editChannel()
 
 
         if(flag){
