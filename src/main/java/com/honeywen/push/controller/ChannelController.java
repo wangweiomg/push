@@ -5,6 +5,7 @@ import com.honeywen.push.entity.Channel;
 import com.honeywen.push.entity.Result;
 import com.honeywen.push.service.ChannelService;
 import com.honeywen.push.util.ResultUtil;
+import me.chanjar.weixin.mp.api.WxMpService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,8 @@ public class ChannelController {
 
     @Autowired
     private ChannelService channelService;
+    @Autowired
+    private WxMpService wxMpService;
 
     /**
      * 通道数据校验

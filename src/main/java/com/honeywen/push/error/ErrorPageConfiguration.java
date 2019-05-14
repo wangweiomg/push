@@ -1,4 +1,4 @@
-package com.honeywen.push.controller;
+package com.honeywen.push.error;
 
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.ErrorPageRegistrar;

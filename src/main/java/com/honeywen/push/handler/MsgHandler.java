@@ -9,6 +9,7 @@ import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
+import me.chanjar.weixin.mp.bean.result.WxMpQrCodeTicket;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -38,6 +39,11 @@ public class MsgHandler extends AbstractHandler {
                     .fromUser(wxMessage.getToUser())
                     .toUser(wxMessage.getFromUser()).build();
         }
+
+        // 二维码
+        WxMpQrCodeTicket ticket = wxMpService.getQrcodeService().qrCodeCreateLastTicket(1);
+        String url = wxMpService.getQrcodeService().qrCodePictureUrl(ticket.getTicket());
+        log.info("<--qrcode url-->{}", url);
 
         // 组装回复消息
         String content = "收到消息内容： " + JSON.toJSONString(wxMessage);
