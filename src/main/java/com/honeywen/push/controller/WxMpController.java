@@ -54,6 +54,7 @@ public class WxMpController {
         if (encType == null) {
             WxMpXmlMessage inMessage = WxMpXmlMessage.fromXml(requestBody);
             WxMpXmlOutMessage outMessage = this.route(inMessage);
+            log.info("<--明文传输--> 返回消息outMessage-->{}", outMessage);
             if (outMessage == null) {
                 return "";
             }
