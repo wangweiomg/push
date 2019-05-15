@@ -1,7 +1,6 @@
 package com.honeywen.push.handler;
 
 import com.honeywen.push.entity.User;
-import com.honeywen.push.service.ChannelService;
 import com.honeywen.push.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -40,7 +39,10 @@ public class ScanHandler extends AbstractHandler {
         userService.saveOrUpdate(user);
 
         String ticket = wxMessage.getTicket();
-        // 扫完码登录，跳转到通道页面
+        // 1. 扫完码登录，跳转到通道页面
+
+        // 2. 扫完码关注，关联到通道
+
 
 
 
