@@ -1,6 +1,8 @@
 package com.honeywen.push.service.impl;
 
+import com.honeywen.push.dao.ChannelMapper;
 import com.honeywen.push.dao.UserMapper;
+import com.honeywen.push.entity.Channel;
 import com.honeywen.push.entity.User;
 import com.honeywen.push.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ChannelMapper channelMapper;
 
 
     @Override
@@ -52,6 +56,18 @@ public class UserServiceImpl implements UserService {
         return userMapper.findOpenIdList(sendKey);
     }
 
+    @Override
+    public void saveToUserChannel(Integer userId, String ticket) {
+
+        Channel channel = channelMapper.getChannelByTicket(ticket);
+        if (channel == null) {
+            return;
+        }
+
+        userMapper.saveUserChannel(userId, channel.getId());
+
+
+    }
 
 
 }

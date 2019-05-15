@@ -53,6 +53,12 @@
         from t_channel where id =#{id} and user_id = #{userId}
     </select>
 
+    <select id="getChannelByTicket" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM t_channel where ticket = #{ticket}
+    </select>
+
     <update id="editChannel" parameterType="com.honeywen.push.entity.Channel">
         update t_channel set name = #{name} , email=#{email},isforbidden=#{isforbidden} where id=#{id} and user_id = #{userId}
     </update>

@@ -23,4 +23,6 @@ public interface ChannelMapper {
     boolean editChannel(Channel channel);
 
     boolean deleteChannelById(Channel channel);
+
+    Channel getChannelByTicket(String ticket);
 }

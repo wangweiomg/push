@@ -42,6 +42,7 @@ public class ScanHandler extends AbstractHandler {
         // 1. 扫完码登录，跳转到通道页面
 
         // 2. 扫完码关注，关联到通道
+        userService.saveToUserChannel(user.getId(), ticket);
 
 
 

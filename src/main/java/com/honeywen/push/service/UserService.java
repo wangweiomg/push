@@ -19,4 +19,11 @@ public interface UserService {
     boolean isExist(String openId);
 
     List<String> findOpenIdList(String sendKey);
+
+    /**
+     * 保存到user_channel
+     * @param userId
+     * @param ticket
+     */
+    void saveToUserChannel(Integer userId, String ticket);
 }
