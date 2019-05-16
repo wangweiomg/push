@@ -1,13 +1,10 @@
 package com.honeywen.push.service.impl;
 
+import com.honeywen.push.dao.ChannelMapper;
 import com.honeywen.push.dao.UserMapper;
 import com.honeywen.push.entity.Channel;
-import com.honeywen.push.dao.ChannelMapper;
 import com.honeywen.push.service.ChannelService;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.result.WxMpQrCodeTicket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,14 +23,12 @@ public class ChannelServiceImpl implements ChannelService {
     private ChannelMapper channelMapper;
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    private WxMpService wxMpService;
 
     @Override
     public int addChannel(Channel channel) {
         //通道名称重复校验
         Channel channel1 = channelMapper.getChannelByName(channel);
-        if(channel1 != null){
+        if (channel1 != null) {
             return 1;
         }
         boolean flag = channelMapper.addChannel(channel);
@@ -41,18 +36,10 @@ public class ChannelServiceImpl implements ChannelService {
         // 默认保存管理员为通道第一个用户
         userMapper.saveUserChannel(channel.getUserId(), channel.getId());
 
-        try {
-            WxMpQrCodeTicket ticket = wxMpService.getQrcodeService().qrCodeCreateLastTicket(channel.getId());
-        } catch (WxErrorException e) {
-            log.error("创建qrcode失败", e);
 
-        }
-//        channelMapper.editChannel()
-
-
-        if(flag){
+        if (flag) {
             return 0;
-        }else{
+        } else {
             return -1;
         }
     }
@@ -68,16 +55,21 @@ public class ChannelServiceImpl implements ChannelService {
     }
 
     @Override
+    public Channel getChannelByTicket(String ticket) {
+        return channelMapper.getChannelByTicket(ticket);
+    }
+
+    @Override
     public int editChannel(Channel channel) {
         //通道名称重复校验
         Channel channel1 = channelMapper.getChannelByName(channel);
-        if(channel1 != null && !channel1.getName().equals(channel.getOldname())){
+        if (channel1 != null && !channel1.getName().equals(channel.getOldname())) {
             return 1;
         }
         boolean flag = channelMapper.editChannel(channel);
-        if(flag){
+        if (flag) {
             return 0;
-        }else{
+        } else {
             return -1;
         }
     }
@@ -85,9 +77,9 @@ public class ChannelServiceImpl implements ChannelService {
     @Override
     public int deleteChannelById(Channel channel) {
         boolean flag = channelMapper.deleteChannelById(channel);
-        if(flag){
+        if (flag) {
             return 0;
-        }else{
+        } else {
             return -1;
         }
     }

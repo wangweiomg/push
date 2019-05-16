@@ -26,13 +26,15 @@
           email,
           user_id,
           send_key,
-          isforbidden)
+          isforbidden,
+          ticket)
           values (
             #{name},
             #{email},
             #{userId},
             #{sendKey},
-            #{isforbidden})
+            #{isforbidden},
+            #{ticket})
     </insert>
 
     <select id="getChannel" parameterType="Integer" resultMap="BaseResultMap">
@@ -60,7 +62,22 @@
     </select>
 
     <update id="editChannel" parameterType="com.honeywen.push.entity.Channel">
-        update t_channel set name = #{name} , email=#{email},isforbidden=#{isforbidden} where id=#{id} and user_id = #{userId}
+        update t_channel
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="ticket != null">
+                ticket = #{ticket}
+            </if>
+            <if test="isforbidden != null">
+                isforbidden = #{isforbidden},
+            </if>
+        </set>
+        where id=#{id}
     </update>
 
     <delete id="deleteChannelById" parameterType="com.honeywen.push.entity.Channel">

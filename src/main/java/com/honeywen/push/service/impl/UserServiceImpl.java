@@ -36,10 +36,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveOrUpdate(User user) {
 
-        if (isExist(user.getOpenId())) {
-            userMapper.update(user);
-        } else {
+        User oldUser = userMapper.findByOpenId(user.getOpenId());
+        if (oldUser == null) {
+
             userMapper.save(user);
+        } else {
+            user.setId(oldUser.getId());
+            userMapper.update(user);
         }
 
     }

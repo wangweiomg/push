@@ -1,11 +1,12 @@
 package com.honeywen.push.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.honeywen.push.entity.Channel;
 import com.honeywen.push.entity.Result;
 import com.honeywen.push.service.ChannelService;
 import com.honeywen.push.util.ResultUtil;
+import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.bean.result.WxMpQrCodeTicket;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,7 +75,7 @@ public class ChannelController {
      * @return
      */
     @PostMapping("/addChannel")
-    public Result addChannel(Channel channel){
+    public Result addChannel(Channel channel) throws WxErrorException {
         //数据校验
         Result rs =  ChannelValidate(channel);
         if(rs.getStatus() != 0){
@@ -86,7 +87,14 @@ public class ChannelController {
         //生成sendkey todo
         String key = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
         channel.setSendKey(key);
+
+        // 生成通道永久二维码
+
         int flag = channelService.addChannel(channel);
+        WxMpQrCodeTicket ticket = wxMpService.getQrcodeService().qrCodeCreateLastTicket(channel.getId());
+        channel.setTicket(ticket.getTicket());
+        channelService.editChannel(channel);
+
         return returnResutl(flag);
     }
 

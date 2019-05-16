@@ -58,4 +58,11 @@ public class Result<T> {
     public void setError_code(Integer error_code) {
         this.error_code = error_code;
     }
+
+    public Result<T> success(T t) {
+        this.data = t;
+        this.status = 0;
+        this.msg = "success";
+        return this;
+    }
 }

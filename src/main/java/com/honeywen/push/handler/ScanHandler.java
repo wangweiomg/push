@@ -1,6 +1,9 @@
 package com.honeywen.push.handler;
 
+import com.honeywen.push.builder.TextBuilder;
+import com.honeywen.push.entity.Channel;
 import com.honeywen.push.entity.User;
+import com.honeywen.push.service.ChannelService;
 import com.honeywen.push.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -25,6 +28,8 @@ public class ScanHandler extends AbstractHandler {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private ChannelService channelService;
 
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService,
@@ -32,22 +37,33 @@ public class ScanHandler extends AbstractHandler {
 
         log.info("<--ScanHandler 被调用了wxMessage-->{}", wxMessage);
         log.info("<--ScanHandler 被调用了context-->{}", context);
-        String fromUser = wxMessage.getFromUser();
-        WxMpUser wxMpUser = wxMpService.getUserService().userInfo(fromUser);
+        log.info("<--ScanHandler 被调用了context-->{}", context);
+
+        WxMpUser wxMpUser = wxMpService.getUserService().userInfo(wxMessage.getFromUser());
+
+
         User user = new User();
-        BeanUtils.copyProperties(wxMpUser, user);
-        userService.saveOrUpdate(user);
+        if (wxMpUser != null) {
+            BeanUtils.copyProperties(wxMpUser, user);
+            userService.saveOrUpdate(user);
+        }
 
+        // 1. 获取ticket, 查询渠道中是否有如此ticket, 若有则是关联渠道，若没有就是登陆操作
         String ticket = wxMessage.getTicket();
-        // 1. 扫完码登录，跳转到通道页面
 
-        // 2. 扫完码关注，关联到通道
-        userService.saveToUserChannel(user.getId(), ticket);
+        Channel channel = channelService.getChannelByTicket(ticket);
+        if (channel == null) {
+            // 登陆操作
+//            sessionManager
 
 
+        } else {
+            // 关联操作
+            userService.saveToUserChannel(user.getId(), ticket);
+        }
 
 
         // 扫码事件处理
-        return null;
+        return new TextBuilder().build("欢迎来到兄弟干果商行", wxMessage, wxMpService);
     }
 }

@@ -18,6 +18,8 @@ public interface ChannelService {
 
     Channel getChannelById(Channel channel);
 
+    Channel getChannelByTicket(String ticket);
+
     int editChannel(Channel channel);
 
     int deleteChannelById(Channel channel);
