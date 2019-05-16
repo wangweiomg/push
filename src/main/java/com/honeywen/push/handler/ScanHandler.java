@@ -55,7 +55,7 @@ public class ScanHandler extends AbstractHandler {
             userService.saveToUserChannel(user.getId(), Integer.valueOf(wxMessage.getEventKey()));
 
         } else {
-            // 登陆操作
+            // 注册登陆操作
 
         }
 

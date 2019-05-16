@@ -7,6 +7,7 @@ import com.honeywen.push.entity.User;
 import com.honeywen.push.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @date 2019/5/5
  */
 @Service
+@Transactional(readOnly = true, rollbackFor = Exception.class)
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -29,11 +31,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void save(User user) {
         userMapper.save(user);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void saveOrUpdate(User user) {
 
         User oldUser = userMapper.findByOpenId(user.getOpenId());
@@ -60,6 +64,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void saveToUserChannel(Integer userId, Integer channelId) {
 
         userMapper.saveUserChannel(userId, channelId);
