@@ -19,4 +19,11 @@ public class Test {
 
         System.out.println(r);
     }
+
+
+    @org.junit.Test
+    public void test2() {
+        String s = "gQEM8jwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyMjJzU2xFU1lleUQxMDAwME0wM24AAgSIp9pcAwQAAAAA";
+        System.out.println(s.length());
+    }
 }
