@@ -37,7 +37,7 @@ public class ScanHandler extends AbstractHandler {
 
         log.info("<--ScanHandler 被调用了wxMessage-->{}", wxMessage);
         log.info("<--ScanHandler 被调用了context-->{}", context);
-        log.info("<--ScanHandler 被调用了context-->{}", context);
+        log.info("<--ScanHandler 被调用了, eventKey-->{}", wxMessage.getEventKey());
 
         WxMpUser wxMpUser = wxMpService.getUserService().userInfo(wxMessage.getFromUser());
 

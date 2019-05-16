@@ -41,7 +41,7 @@ public class MsgHandler extends AbstractHandler {
         }
 
         // 二维码
-        WxMpQrCodeTicket ticket = wxMpService.getQrcodeService().qrCodeCreateLastTicket(100021);
+        WxMpQrCodeTicket ticket = wxMpService.getQrcodeService().qrCodeCreateLastTicket(12001);
         String url = wxMpService.getQrcodeService().qrCodePictureUrl(ticket.getTicket());
         log.info("<--ticket url-->{}, ticket-->{}", ticket.getUrl(), ticket);
         log.info("<--qrcode url-->{}", url);
