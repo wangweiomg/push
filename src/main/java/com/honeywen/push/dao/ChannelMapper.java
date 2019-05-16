@@ -24,5 +24,5 @@ public interface ChannelMapper {
 
     boolean deleteChannelById(Channel channel);
 
-    Channel getChannelByTicket(String ticket);
+    Channel getChannelByChannelId(Integer channelId);
 }

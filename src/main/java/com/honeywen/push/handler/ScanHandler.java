@@ -1,7 +1,6 @@
 package com.honeywen.push.handler;
 
 import com.honeywen.push.builder.TextBuilder;
-import com.honeywen.push.entity.Channel;
 import com.honeywen.push.entity.User;
 import com.honeywen.push.service.ChannelService;
 import com.honeywen.push.service.UserService;
@@ -49,17 +48,15 @@ public class ScanHandler extends AbstractHandler {
         }
 
         // 1. 获取ticket, 查询渠道中是否有如此ticket, 若有则是关联渠道，若没有就是登陆操作
-        String ticket = wxMessage.getTicket();
+        boolean exist = channelService.isExist(Integer.valueOf(wxMessage.getEventKey()));
 
-        Channel channel = channelService.getChannelByTicket(ticket);
-        if (channel == null) {
-            // 登陆操作
-//            sessionManager
-
+        if (exist) {
+            // 关联操作
+            userService.saveToUserChannel(user.getId(), Integer.valueOf(wxMessage.getEventKey()));
 
         } else {
-            // 关联操作
-            userService.saveToUserChannel(user.getId(), ticket);
+            // 登陆操作
+
         }
 
 

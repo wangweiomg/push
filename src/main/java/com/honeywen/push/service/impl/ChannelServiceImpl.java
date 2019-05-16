@@ -55,9 +55,10 @@ public class ChannelServiceImpl implements ChannelService {
     }
 
     @Override
-    public Channel getChannelByTicket(String ticket) {
-        return channelMapper.getChannelByTicket(ticket);
+    public Channel getChannelByChannelId(Integer channelId) {
+        return channelMapper.getChannelByChannelId(channelId);
     }
+
 
     @Override
     public int editChannel(Channel channel) {
@@ -82,5 +83,10 @@ public class ChannelServiceImpl implements ChannelService {
         } else {
             return -1;
         }
+    }
+
+    @Override
+    public boolean isExist(Integer channelId) {
+        return channelMapper.getChannelByChannelId(channelId) != null;
     }
 }

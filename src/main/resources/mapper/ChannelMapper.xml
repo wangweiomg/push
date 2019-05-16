@@ -55,10 +55,10 @@
         from t_channel where id =#{id} and user_id = #{userId}
     </select>
 
-    <select id="getChannelByTicket" parameterType="java.lang.String" resultMap="BaseResultMap">
-        SELECT
+    <select id="getChannelByChannelId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
         <include refid="columns"/>
-        FROM t_channel where ticket = #{ticket}
+        from t_channel where id =#{id}
     </select>
 
     <update id="editChannel" parameterType="com.honeywen.push.entity.Channel">

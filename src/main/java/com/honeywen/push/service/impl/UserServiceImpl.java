@@ -60,14 +60,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveToUserChannel(Integer userId, String ticket) {
+    public void saveToUserChannel(Integer userId, Integer channelId) {
 
-        Channel channel = channelMapper.getChannelByTicket(ticket);
-        if (channel == null) {
-            return;
-        }
-
-        userMapper.saveUserChannel(userId, channel.getId());
+        userMapper.saveUserChannel(userId, channelId);
 
 
     }

@@ -18,10 +18,11 @@ public interface ChannelService {
 
     Channel getChannelById(Channel channel);
 
-    Channel getChannelByTicket(String ticket);
+    Channel getChannelByChannelId(Integer channelId);
 
     int editChannel(Channel channel);
 
     int deleteChannelById(Channel channel);
 
+    boolean isExist(Integer channelId);
 }

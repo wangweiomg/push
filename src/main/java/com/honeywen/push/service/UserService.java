@@ -23,7 +23,7 @@ public interface UserService {
     /**
      * 保存到user_channel
      * @param userId
-     * @param ticket
+     * @param channelId
      */
-    void saveToUserChannel(Integer userId, String ticket);
+    void saveToUserChannel(Integer userId, Integer channelId);
 }
