@@ -25,5 +25,10 @@ public class Test {
     public void test2() {
         String s = "gQEM8jwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyMjJzU2xFU1lleUQxMDAwME0wM24AAgSIp9pcAwQAAAAA";
         System.out.println(s.length());
+
+        System.out.println(s.hashCode());
+        System.out.println(s.hashCode() % 100000);
+
+        System.out.println("3e0a9f53e5d2b87a84c765764e3eaec6".length());
     }
 }

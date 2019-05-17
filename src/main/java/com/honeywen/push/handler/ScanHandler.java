@@ -6,6 +6,7 @@ import com.honeywen.push.service.ChannelService;
 import com.honeywen.push.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.session.WxSession;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
@@ -47,15 +48,16 @@ public class ScanHandler extends AbstractHandler {
             userService.saveOrUpdate(user);
         }
 
-        // 1. 获取ticket, 查询渠道中是否有如此ticket, 若有则是关联渠道，若没有就是登陆操作
-        boolean exist = channelService.isExist(Integer.valueOf(wxMessage.getEventKey()));
-
-        if (exist) {
-            // 关联操作
-            userService.saveToUserChannel(user.getId(), Integer.valueOf(wxMessage.getEventKey()));
+        // 获取扫码场景值id
+        // 场景值如果是UUID字符型，那么就是扫码登陆，如果数字型就是关联通道
+        String eventKey = wxMessage.getEventKey();
+        if (eventKey.length() > 5) {
+            WxSession session = sessionManager.getSession(eventKey);
+            session.setAttribute(eventKey, Boolean.TRUE);
 
         } else {
-            // 注册登陆操作
+            // 关联操作
+            userService.saveToUserChannel(user.getId(), Integer.valueOf(wxMessage.getEventKey()));
 
         }
 
