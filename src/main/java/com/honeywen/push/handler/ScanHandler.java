@@ -2,7 +2,6 @@ package com.honeywen.push.handler;
 
 import com.honeywen.push.builder.TextBuilder;
 import com.honeywen.push.entity.User;
-import com.honeywen.push.service.ChannelService;
 import com.honeywen.push.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -28,8 +27,6 @@ public class ScanHandler extends AbstractHandler {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private ChannelService channelService;
 
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService,

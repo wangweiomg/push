@@ -28,7 +28,7 @@ import java.util.List;
 public class PublishController {
 
     @Value("${wx.mp.template3}")
-    private String template2;
+    private String template3;
 
     @Autowired
     private WxMpService wxMpService;
@@ -46,7 +46,7 @@ public class PublishController {
         List<WxMpTemplateData> list = Lists.newArrayList(first, keyword1, keyword2, remark);
         try {
 
-            WxMpTemplateMessage msg = WxMpTemplateMessage.builder().templateId(template2).data(list).build();
+            WxMpTemplateMessage msg = WxMpTemplateMessage.builder().templateId(template3).data(list).build();
 
             // 通过key找通道，找到要接收人
 //            List<User> users = userService.findAll();
