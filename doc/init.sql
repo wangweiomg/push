@@ -1,3 +1,4 @@
+-- CREATE DATABASE push default character set utf8mb4 collate utf8mb4_unicode_ci;
 -- CREATE TABLE t_user (
 --   id int AUTO_INCREMENT PRIMARY KEY ,
 --   name VARCHAR(30) NOT NULL COMMENT '名字',
