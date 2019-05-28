@@ -10,6 +10,7 @@ import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +42,8 @@ public class AccountController {
 
 
     @GetMapping("/msg")
-    public void wxMsg() {
+    public void wxMsg(ModelMap map) {
+        System.out.println(map.get("author"));
 
         String wangwei = "o7ugQszTbCaw1pQkTSMVO7327-z4";
 //        String yuanfang = "o7ugQszzrhLLsHKZA4r7x0dgrmRI";
