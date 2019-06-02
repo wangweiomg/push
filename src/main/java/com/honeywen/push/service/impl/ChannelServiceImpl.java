@@ -3,6 +3,7 @@ package com.honeywen.push.service.impl;
 import com.honeywen.push.dao.ChannelMapper;
 import com.honeywen.push.dao.UserMapper;
 import com.honeywen.push.entity.Channel;
+import com.honeywen.push.entity.User;
 import com.honeywen.push.service.ChannelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,13 @@ public class ChannelServiceImpl implements ChannelService {
 
     @Override
     public Channel getChannelById(Channel channel) {
-        return channelMapper.getChannelById(channel);
+        Channel ch = channelMapper.getChannelById(channel);
+
+        List<User> users = channelMapper.findSubscribeList(ch.getId());
+
+        ch.setSubscribeList(users);
+
+        return ch;
     }
 
     @Override

@@ -174,7 +174,7 @@
         <logger name="com.honeywen.push" level="debug"/>
     </springProfile>
 
-    <root level="info">
+    <root level="DEBUG">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="DEBUG_FILE" />
         <appender-ref ref="INFO_FILE" />

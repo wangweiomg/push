@@ -2,6 +2,8 @@ package com.honeywen.push.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Author RYF
  * @Description 通道实体列 物理表 channel
@@ -56,5 +58,10 @@ public @Data class Channel {
         return "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + this.getTicket();
     }
 
+
+    /**
+     * 通道订阅者
+     */
+    public List<User> subscribeList;
 
 }

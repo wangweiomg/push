@@ -2,6 +2,7 @@ package com.honeywen.push.dao;
 
 import com.honeywen.push.entity.Channel;
 import com.honeywen.push.entity.SysUser;
+import com.honeywen.push.entity.User;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface ChannelMapper {
     boolean deleteChannelById(Channel channel);
 
     Channel getChannelByChannelId(Integer channelId);
+
+    List<User> findSubscribeList(Integer channelId);
 }

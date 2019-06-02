@@ -83,4 +83,18 @@
     <delete id="deleteChannelById" parameterType="com.honeywen.push.entity.Channel">
         delete from t_channel where id = #{id} and user_id = #{userId}
     </delete>
+
+
+    <select id="findSubscribeList" parameterType="integer" resultType="com.honeywen.push.entity.User">
+        SELECT
+        u.id,
+        u.nickname,
+        u.avatar_url,
+        u.open_id,
+        u.union_id
+        FROM t_user_channel uc
+        INNER JOIN t_user u on u.id = uc.user_id
+        WHERE uc.channel_id = #{channelId}
+
+    </select>
 </mapper>
