@@ -74,9 +74,10 @@ CREATE TABLE t_channel (
   user_id int NOT NULL COMMENT '用户id',
   send_key VARCHAR(50) NOT NULL UNIQUE  COMMENT 'sendkey',
   isforbidden CHAR(1) NOT NULL  COMMENT '是否禁用 1：是 0：否',
-  ticket VARCHAR(100) NOT NULL COMMENT '二维码'
+  ticket VARCHAR(100) COMMENT '二维码'
 ) COMMENT '通道表';
 
+DROP TABLE IF EXISTS t_user_channel;
 CREATE TABLE t_user_channel (
   user_id INT COMMENT '用户ID',
   channel_id INT COMMENT  '渠道ID',
