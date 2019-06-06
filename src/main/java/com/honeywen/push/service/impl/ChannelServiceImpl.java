@@ -70,10 +70,10 @@ public class ChannelServiceImpl implements ChannelService {
     @Override
     public int editChannel(Channel channel) {
         //通道名称重复校验
-        Channel channel1 = channelMapper.getChannelByName(channel);
-        if (channel1 != null && !channel1.getName().equals(channel.getOldname())) {
-            return 1;
-        }
+//        Channel channel1 = channelMapper.getChannelByName(channel);
+//        if (channel1 != null && !channel1.getName().equals(channel.getOldname())) {
+//            return 1;
+//        }
         boolean flag = channelMapper.editChannel(channel);
         if (flag) {
             return 0;
