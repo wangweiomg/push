@@ -76,7 +76,7 @@
                FROM t_user_channel uc
                WHERE uc.channel_id = (SELECT id
                                       FROM t_channel c
-                                      WHERE c.sendkey = #{sendKey}))
+                                      WHERE c.send_key = #{sendKey}))
 
     </select>
 
