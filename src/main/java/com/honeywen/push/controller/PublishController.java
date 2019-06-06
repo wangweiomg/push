@@ -10,7 +10,6 @@ import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +36,7 @@ public class PublishController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/send")
+    @PostMapping("/send")
     public void sendMsg(@RequestParam String sendKey, @RequestParam String title, @RequestParam String content) {
 
 
