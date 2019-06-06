@@ -72,5 +72,17 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    /**
+     *  是否存在
+     * @param userId
+     * @param channelId
+     * @return
+     */
+    @Override
+    public boolean existUserChannel(Integer userId, Integer channelId) {
+        int count = userMapper.findUserChannelCount(userId, channelId);
+        return count > 0;
+    }
+
 
 }

@@ -1,7 +1,9 @@
 package com.honeywen.push.handler;
 
 import com.honeywen.push.builder.TextBuilder;
+import com.honeywen.push.entity.Channel;
 import com.honeywen.push.entity.User;
+import com.honeywen.push.service.ChannelService;
 import com.honeywen.push.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -15,6 +17,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,8 +56,11 @@ public class ScanHandler extends AbstractHandler {
             session.setAttribute(eventKey, Boolean.TRUE);
 
         } else {
-            // 关联操作
-            userService.saveToUserChannel(user.getId(), Integer.valueOf(wxMessage.getEventKey()));
+            // 关联操作, 不存在再插入
+            boolean exist = userService.existUserChannel(user.getId(), Integer.valueOf(eventKey));
+            if (!exist) {
+                userService.saveToUserChannel(user.getId(), Integer.valueOf(eventKey));
+            }
 
         }
 

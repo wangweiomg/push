@@ -26,4 +26,6 @@ public interface UserService {
      * @param channelId
      */
     void saveToUserChannel(Integer userId, Integer channelId);
+
+    boolean existUserChannel(Integer id, Integer integer);
 }

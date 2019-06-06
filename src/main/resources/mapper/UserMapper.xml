@@ -65,6 +65,10 @@
         AND u.id = #{id}
     </select>
 
+    <select id="findUserChannelCount" resultType="int">
+        SELECT COUNT(*) FROM t_user_channel WHERE user_id = #{userId} AND channel_id = #{channelId}
+    </select>
+
     <select id="findOpenIdList" parameterType="java.lang.String" resultType="java.lang.String">
         SELECT open_id
         FROM t_user u

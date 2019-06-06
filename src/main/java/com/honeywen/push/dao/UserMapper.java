@@ -47,4 +47,7 @@ public interface UserMapper {
      * @param channelId
      */
     void saveUserChannel(@Param("userId") Integer userId, @Param("channelId") Integer channelId);
+
+    int findUserChannelCount(@Param("userId") Integer userId, @Param("channelId") Integer channelId);
+
 }
