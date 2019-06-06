@@ -37,7 +37,7 @@ public class PublishController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/send")
+    @GetMapping("/send")
     public void sendMsg(@RequestParam String sendKey, @RequestParam String title, @RequestParam String content) {
 
 
