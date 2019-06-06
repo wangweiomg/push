@@ -9,6 +9,7 @@
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="send_key" property="sendKey" jdbcType="VARCHAR"/>
         <result column="isforbidden" property="isforbidden" jdbcType="VARCHAR"/>
+        <result column="ticket" property="ticket" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="columns">
@@ -17,7 +18,8 @@
         email,
         user_id,
         send_key,
-        isforbidden
+        isforbidden,
+        ticket
     </sql>
 
     <insert id="addChannel" parameterType="com.honeywen.push.entity.Channel" useGeneratedKeys="true" keyProperty="id">
