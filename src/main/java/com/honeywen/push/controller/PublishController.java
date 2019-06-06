@@ -1,6 +1,7 @@
 package com.honeywen.push.controller;
 
 import com.google.common.collect.Lists;
+import com.honeywen.push.entity.User;
 import com.honeywen.push.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -49,12 +50,12 @@ public class PublishController {
             WxMpTemplateMessage msg = WxMpTemplateMessage.builder().templateId(template3).data(list).build();
 
             // 通过key找通道，找到要接收人
-//            List<User> users = userService.findAll();
-//            for (User user : users) {
-//                log.info("toUser nickname-->{}, openId-->{}", user.getNickname(), user.getOpenId());
-//                msg.setToUser(user.getOpenId());
-//                wxMpService.getTemplateMsgService().sendTemplateMsg(msg);
-//            }
+            List<User> users = userService.findAll();
+            for (User user : users) {
+                log.info("toUser nickname-->{}, openId-->{}", user.getNickname(), user.getOpenId());
+                msg.setToUser(user.getOpenId());
+                wxMpService.getTemplateMsgService().sendTemplateMsg(msg);
+            }
             List<String> openIdList = userService.findOpenIdList(sendKey);
             for (String openId : openIdList) {
                 msg.setToUser(openId);
