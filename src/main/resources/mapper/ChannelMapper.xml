@@ -71,7 +71,7 @@
                 email = #{email},
             </if>
             <if test="ticket != null">
-                ticket = #{ticket}
+                ticket = #{ticket},
             </if>
             <if test="isforbidden != null">
                 isforbidden = #{isforbidden},
