@@ -4,6 +4,7 @@ import com.honeywen.push.entity.Channel;
 import com.honeywen.push.entity.Result;
 import com.honeywen.push.service.ChannelService;
 import com.honeywen.push.util.ResultUtil;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpQrCodeTicket;
@@ -21,6 +22,7 @@ import java.util.UUID;
  * @Description 通道管理的控制类
  * @Date 2019-05-07 22:45
  **/
+@Slf4j
 @RestController
 @RequestMapping("/api/channel")
 public class ChannelController {
@@ -88,10 +90,11 @@ public class ChannelController {
         String key = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
         channel.setSendKey(key);
 
-        // 生成通道永久二维码
 
         int flag = channelService.addChannel(channel);
+        // 生成通道永久二维码
         WxMpQrCodeTicket ticket = wxMpService.getQrcodeService().qrCodeCreateLastTicket(channel.getId());
+        log.info("<--start create qrcode--> channelId-->{}, ticket-->{}", channel.getId(), ticket.getTicket());
         channel.setTicket(ticket.getTicket());
         channelService.editChannel(channel);
 
