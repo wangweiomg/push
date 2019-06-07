@@ -68,7 +68,9 @@ public class UserController {
     public Result<Boolean> loginHandle(String logintoken, HttpServletRequest request) {
 
         String token = (String) request.getSession().getAttribute(logintoken);
-        if (Objects.equals(token, Boolean.TRUE.toString())) {
+        boolean flag = Objects.equals(token, Boolean.TRUE.toString());
+        log.info("<--equals-->{}, token -->{}, logintoken-->{}", flag, token, logintoken);
+        if (flag) {
 
             return ResultUtil.success(Boolean.TRUE);
 

@@ -53,7 +53,8 @@ public class ScanHandler extends AbstractHandler {
         String eventKey = wxMessage.getEventKey();
         if (eventKey.length() > 5) {
             WxSession session = sessionManager.getSession(eventKey);
-            session.setAttribute(eventKey, Boolean.TRUE);
+            session.setAttribute(eventKey, Boolean.TRUE.toString());
+            log.info("<--scan  eventKey-->{}", eventKey);
 
         } else {
             // 关联操作, 不存在再插入
