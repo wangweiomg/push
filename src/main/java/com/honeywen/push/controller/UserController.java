@@ -51,6 +51,7 @@ public class UserController {
         result.put("ticket", ticket.getTicket());
 //        result.put("qr_url", ticket.getUrl());
         result.put("qr_url", "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + ticket.getTicket());
+        result.put("logintoken", uuid);
 
 
 
