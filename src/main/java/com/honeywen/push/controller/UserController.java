@@ -56,7 +56,7 @@ public class UserController {
 
 
 
-        request.getSession().setAttribute(uuid, Collections.emptyList());
+        request.getSession().setAttribute(uuid, Boolean.FALSE.toString());
 
 
         return ResultUtil.success(result);
