@@ -3,6 +3,7 @@ package com.honeywen.push.controller;
 import com.google.common.collect.Maps;
 import com.honeywen.push.entity.Result;
 import com.honeywen.push.util.ResultUtil;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpQrCodeTicket;
@@ -23,6 +24,7 @@ import java.util.UUID;
  * @author wangwei
  * @date 2019/5/5
  */
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -43,10 +45,15 @@ public class UserController {
         int expires = 1800;
         WxMpQrCodeTicket ticket = wxMpService.getQrcodeService().qrCodeCreateTmpTicket(uuid, expires);
 
+        log.info("<--ticket-->{}, ticket.getUrl-->{}", ticket, ticket.getUrl());
         Map<String, Object> result = Maps.newHashMap();
         result.put("expire_seconds", expires);
         result.put("ticket", ticket.getTicket());
-        result.put("qr_url", ticket.getUrl());
+//        result.put("qr_url", ticket.getUrl());
+        result.put("qr_url", "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + ticket.getTicket());
+
+
+
 
         request.getSession().setAttribute(uuid, Collections.emptyList());
 
