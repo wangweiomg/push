@@ -67,9 +67,9 @@ public class UserController {
     @GetMapping("/check")
     public Result<Boolean> loginHandle(String logintoken, HttpServletRequest request) {
 
-        String token = (String) request.getSession().getAttribute(logintoken);
-        boolean flag = Objects.equals(token, Boolean.TRUE.toString());
-        log.info("<--equals-->{}, token -->{}, logintoken-->{}", flag, token, logintoken);
+        String result = (String) request.getSession().getAttribute(logintoken);
+        boolean flag = Objects.equals(result, Boolean.TRUE.toString());
+        log.info("<--equals-->{}, result -->{}, logintoken-->{}", flag, result, logintoken);
         if (flag) {
 
             return ResultUtil.success(Boolean.TRUE);
