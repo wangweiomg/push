@@ -5,6 +5,7 @@ import com.honeywen.push.entity.Channel;
 import com.honeywen.push.entity.User;
 import com.honeywen.push.service.ChannelService;
 import com.honeywen.push.service.UserService;
+import com.honeywen.push.util.IdGen;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSession;
@@ -52,9 +53,14 @@ public class ScanHandler extends AbstractHandler {
         // 场景值如果是UUID字符型，那么就是扫码登陆，如果数字型就是关联通道
         String eventKey = wxMessage.getEventKey();
         if (eventKey.length() > 5) {
-            WxSession session = sessionManager.getSession(eventKey);
-            session.setAttribute(eventKey, Boolean.TRUE.toString());
+//            WxSession session = sessionManager.getSession(eventKey);
+//            session.setAttribute(eventKey, Boolean.TRUE.toString());
             log.info("<--scan  eventKey-->{}", eventKey);
+            long token = IdGen.nextId();
+            // 更新token,说明
+            userService.updateToken(token, wxMessage.getFromUser());
+
+
 
         } else {
             // 关联操作, 不存在再插入

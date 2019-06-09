@@ -7,6 +7,7 @@
 
     <sql id="userColumns">
         id,
+        token,
         login_name,
         password,
         name,
@@ -52,8 +53,7 @@
         SELECT
         <include refid="userColumns"/>
         FROM t_user u
-        WHERE 1=1
-        AND u.open_id = #{openId}
+        WHERE u.open_id = #{openId}
 
     </select>
 
@@ -61,8 +61,14 @@
         SELECT
         <include refid="userColumns"/>
         FROM t_user u
-        WHERE 1=1
-        AND u.id = #{id}
+        WHERE u.id = #{id}
+    </select>
+
+    <select id="findByToken" parameterType="java.lang.String" resultType="com.honeywen.push.entity.User">
+        SELECT
+        <include refid="userColumns"/>
+        FROM t_user u
+        WHERE u.token = #{token}
     </select>
 
     <select id="findUserChannelCount" resultType="int">
@@ -82,6 +88,7 @@
 
     <insert id="save" parameterType="com.honeywen.push.entity.User" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO t_user (
+        token,
         login_name,
         password,
         name,
@@ -103,6 +110,7 @@
         delete_flag
         )
         VALUES(
+        #{token},
         #{loginName},
         #{password},
         #{name},
@@ -128,6 +136,9 @@
     <update id="update" parameterType="com.honeywen.push.entity.User">
         UPDATE t_user
         <set>
+            <if test="token != null ">
+                token = #{token},
+            </if>
             <if test="loginName != null">
                 login_name = #{loginName},
             </if>
@@ -180,5 +191,9 @@
     <insert id="saveUserChannel">
         INSERT INTO t_user_channel (user_id, channel_id) VALUES(#{userId}, #{channelId})
     </insert>
+
+    <update id="updateToken">
+        UPDATE t_user SET token = #{token} WHERE open_id = #{openId}
+    </update>
 
 </mapper>

@@ -50,4 +50,12 @@ public interface UserMapper {
 
     int findUserChannelCount(@Param("userId") Integer userId, @Param("channelId") Integer channelId);
 
+    /**
+     * 更新用户token
+     * @param token
+     * @param openId
+     */
+    void updateToken(@Param("token") Long token, @Param("openId") String openId);
+
+    User findByToken(String token);
 }

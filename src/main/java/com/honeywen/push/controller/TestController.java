@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-public class AccountController {
+public class TestController {
 
     @Autowired
     private WxMpService wxMpService;

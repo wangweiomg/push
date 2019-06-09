@@ -5,6 +5,8 @@ import com.honeywen.push.dao.UserMapper;
 import com.honeywen.push.entity.Channel;
 import com.honeywen.push.entity.User;
 import com.honeywen.push.service.UserService;
+import org.apache.ibatis.annotations.Param;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -82,6 +84,33 @@ public class UserServiceImpl implements UserService {
     public boolean existUserChannel(Integer userId, Integer channelId) {
         int count = userMapper.findUserChannelCount(userId, channelId);
         return count > 0;
+    }
+
+
+    /**
+     * 更新用户token
+     * @param token
+     * @param openId
+     */
+    @Override
+    public void updateToken(Long token, String openId) {
+        userMapper.updateToken(token, openId);
+
+    }
+
+    @Override
+    public User findById(Integer id) {
+        return userMapper.findById(id);
+    }
+
+    @Override
+    public User findByToken(String token) {
+        return userMapper.findByToken(token);
+    }
+
+    @Override
+    public User findByOpenId(String openId) {
+        return userMapper.findByOpenId(openId);
     }
 
 

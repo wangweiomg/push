@@ -28,4 +28,12 @@ public interface UserService {
     void saveToUserChannel(Integer userId, Integer channelId);
 
     boolean existUserChannel(Integer id, Integer integer);
+
+    void updateToken(Long token, String openId);
+
+    User findById(Integer id);
+
+    User findByToken(String token);
+
+    User findByOpenId(String openId);
 }

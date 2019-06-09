@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 public @Data class User extends BaseModel implements Serializable {
 
+    private Long token;
     private String loginName;
     private String password;
     private String name;

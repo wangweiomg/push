@@ -1,21 +1,9 @@
 -- CREATE DATABASE push default character set utf8mb4 collate utf8mb4_unicode_ci;
--- CREATE TABLE t_user (
---   id int AUTO_INCREMENT PRIMARY KEY ,
---   name VARCHAR(30) NOT NULL COMMENT '名字',
---   password VARCHAR(60) NOT NULL COMMENT '密码',
---   email VARCHAR(30) COMMENT '邮箱',
---   phone VARCHAR(30) COMMENT '电话',
---   remark VARCHAR(30) COMMENT '备注'
--- ) COMMENT '用户表';
---
--- INSERT INTO t_user (name, password, email, phone, remark) VALUES ('jack', '123456', 'jack@163.com', '18911331234', 'test');
--- INSERT INTO t_user (name, password, email, phone, remark) VALUES ('rose', 'abced', 'rose@yahoo.com', '13711338884', 'test');
--- INSERT INTO t_user (name, password, email, phone, remark) VALUES ('bob', 'qwerdf', 'bob@gmail.com', '18911330987', 'test');
-
 -- 用户表
 DROP TABLE IF EXISTS t_user;
 CREATE TABLE t_user (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '主键',
+  token BIGINT COMMENT 'token',
   login_name VARCHAR(30) COMMENT '登陆名',
   password VARCHAR(100) COMMENT '密码',
   name VARCHAR(30) COMMENT '用户真名',
@@ -38,7 +26,9 @@ CREATE TABLE t_user (
   create_at datetime COMMENT '创建时间',
   update_by int(11) COMMENT '更新人ID',
   update_at datetime COMMENT '更新时间',
-  delete_flag tinyint(1) DEFAULT 0 COMMENT '删除标志1.是 0否'
+  delete_flag tinyint(1) DEFAULT 0 COMMENT '删除标志1.是 0否',
+
+  UNIQUE (token);
 
 )COMMENT '用户';
 CREATE INDEX idx_user_email ON t_user(email);
