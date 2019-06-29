@@ -15,6 +15,8 @@ public class Constants {
 
     public static final String USER_PREFIX = "user_";
 
+    public static final String LOGIN_PREFIX = "login_";
+
 
 
 

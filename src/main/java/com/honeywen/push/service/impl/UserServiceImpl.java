@@ -92,6 +92,7 @@ public class UserServiceImpl implements UserService {
      * @param token
      * @param openId
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void updateToken(Long token, String openId) {
         userMapper.updateToken(token, openId);

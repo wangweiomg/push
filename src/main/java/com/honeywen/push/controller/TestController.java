@@ -1,6 +1,9 @@
 package com.honeywen.push.controller;
 
 import com.google.common.collect.Lists;
+import com.honeywen.push.entity.User;
+import com.honeywen.push.service.ChannelService;
+import com.honeywen.push.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;

@@ -25,4 +25,6 @@ public interface ChannelService {
     int deleteChannelById(Channel channel);
 
     boolean isExist(Integer channelId);
+
+    List<Channel> getUserChannel(String openId);
 }

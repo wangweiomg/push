@@ -1,14 +1,12 @@
 package com.honeywen.push.handler;
 
+import com.google.common.cache.Cache;
 import com.honeywen.push.builder.TextBuilder;
-import com.honeywen.push.entity.Channel;
 import com.honeywen.push.entity.User;
-import com.honeywen.push.service.ChannelService;
 import com.honeywen.push.service.UserService;
 import com.honeywen.push.util.IdGen;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.common.session.WxSession;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
@@ -16,9 +14,9 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,6 +29,10 @@ public class ScanHandler extends AbstractHandler {
 
     @Autowired
     private UserService userService;
+
+    @Qualifier("userCache")
+    @Autowired
+    private Cache<Object, Object> userCache;
 
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService,
@@ -60,7 +62,7 @@ public class ScanHandler extends AbstractHandler {
             // 更新token,说明
             userService.updateToken(token, wxMessage.getFromUser());
 
-
+            userCache.put(eventKey, wxMessage.getFromUser());
 
         } else {
             // 关联操作, 不存在再插入

@@ -1,5 +1,6 @@
 package com.honeywen.push.controller;
 
+import com.google.common.cache.Cache;
 import com.google.common.collect.Maps;
 import com.honeywen.push.entity.Result;
 import com.honeywen.push.util.ResultUtil;
@@ -7,7 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpQrCodeTicket;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +33,10 @@ public class UserController {
     @Autowired
     private WxMpService wxMpService;
 
+    @Qualifier("userCache")
+    @Autowired
+    private Cache<Object, Object> userCache;
+
     @GetMapping("/hello")
     public String hello() {
         return "hello";
@@ -47,12 +54,8 @@ public class UserController {
         Map<String, Object> result = Maps.newHashMap();
         result.put("expire_seconds", expires);
         result.put("ticket", ticket.getTicket());
-//        result.put("qr_url", ticket.getUrl());
         result.put("qr_url", "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + ticket.getTicket());
         result.put("logintoken", uuid);
-
-
-
 
         request.getSession().setAttribute(uuid, Boolean.FALSE.toString());
 
@@ -65,13 +68,11 @@ public class UserController {
     @GetMapping("/check")
     public Result<Boolean> loginHandle(String logintoken, HttpServletRequest request) {
 
-        String result = (String) request.getSession().getAttribute(logintoken);
-        boolean flag = Objects.equals(result, Boolean.TRUE.toString());
-        log.info("<--equals-->{}, result -->{}, logintoken-->{}", flag, result, logintoken);
-        if (flag) {
+        String result = (String) userCache.getIfPresent(logintoken);
+
+        if (StringUtils.isNotEmpty(result)) {
 
             return ResultUtil.success(Boolean.TRUE);
-
         }
 
         return ResultUtil.success(Boolean.FALSE);

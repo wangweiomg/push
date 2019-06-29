@@ -1,5 +1,6 @@
 package com.honeywen.push.controller;
 
+import com.google.common.cache.Cache;
 import com.honeywen.push.entity.Channel;
 import com.honeywen.push.entity.Result;
 import com.honeywen.push.service.ChannelService;
@@ -10,6 +11,7 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpQrCodeTicket;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +33,9 @@ public class ChannelController {
     private ChannelService channelService;
     @Autowired
     private WxMpService wxMpService;
+    @Qualifier("userCache")
+    @Autowired
+    private Cache<Object, Object> userCache;
 
     /**
      * 通道数据校验
@@ -106,11 +111,15 @@ public class ChannelController {
      * @return
      */
     @PostMapping("/getChannel")
-    public Result getChannel(){
+    public Result getChannel(String token){
         //获取用户id todo
-        Integer userid = 1;
-        List<Channel> channels = channelService.getChannel(userid);
-        return ResultUtil.success(channels);
+        Object openId = userCache.getIfPresent(token);
+        if (openId != null) {
+            List<Channel> channels = channelService.getUserChannel((String)openId);
+            return ResultUtil.success(channels);
+
+        }
+        return ResultUtil.error(404, "no login");
     }
 
     /**

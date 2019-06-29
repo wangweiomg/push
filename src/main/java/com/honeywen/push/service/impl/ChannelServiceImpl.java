@@ -49,7 +49,13 @@ public class ChannelServiceImpl implements ChannelService {
     public List<Channel> getChannel(Integer userId) {
         return channelMapper.getChannel(userId);
     }
+    @Override
+    public List<Channel> getUserChannel(String openId) {
 
+        User user = userMapper.findByOpenId(openId);
+
+        return getChannel(user.getId());
+    }
     @Override
     public Channel getChannelById(Channel channel) {
         Channel ch = channelMapper.getChannelById(channel);
@@ -96,4 +102,6 @@ public class ChannelServiceImpl implements ChannelService {
     public boolean isExist(Integer channelId) {
         return channelMapper.getChannelByChannelId(channelId) != null;
     }
+
+
 }

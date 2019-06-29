@@ -1,5 +1,7 @@
 package com.honeywen.push.test;
 
+import java.io.File;
+
 /**
  * @author wangwei
  * @date 2019/5/16
@@ -30,5 +32,21 @@ public class Test {
         System.out.println(s.hashCode() % 100000);
 
         System.out.println("3e0a9f53e5d2b87a84c765764e3eaec6".length());
+    }
+
+
+    @org.junit.Test
+    public void test3() {
+
+        String path = "/Users/wangwei/test/a/b/c/";
+        File file = new File(path);
+
+        boolean flag = file.exists();
+        System.out.println(flag);
+        if (!flag) {
+            flag = file.mkdirs();
+        }
+        System.out.println(flag);
+
     }
 }
