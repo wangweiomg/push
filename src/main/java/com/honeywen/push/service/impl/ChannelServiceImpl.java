@@ -37,12 +37,7 @@ public class ChannelServiceImpl implements ChannelService {
         // 默认保存管理员为通道第一个用户
         userMapper.saveUserChannel(channel.getUserId(), channel.getId());
 
-
-        if (flag) {
-            return 0;
-        } else {
-            return -1;
-        }
+        return flag ? 0 : -1;
     }
 
     @Override
